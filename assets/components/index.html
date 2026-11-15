@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN" data-component-baseline="veridix-component-baseline-v1">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>智驾 基础组件库</title>
+<link rel="stylesheet" href="tokens.css"><link rel="stylesheet" href="components.css"><link rel="stylesheet" href="resource-center.css"></head>
+<body class="vc-page rc-page">
+<header class="rc-topbar"><a class="rc-brand" href="#top"><span class="rc-mark">V</span><span><strong>智驾</strong><small>基础组件库</small></span></a><span class="rc-baseline"><i class="vc-led"></i>组件样式来自项目组件库</span></header>
+<main class="rc-main" id="top">
+  <section class="rc-intro"><div><span class="rc-kicker">智驾 / UI FOUNDATION</span><h1>基础组件库</h1><p>查看项目原型中可复用的基础组件样式与 HTML 结构。</p></div><div class="rc-total"><strong>22</strong><span>基础组件</span></div></section>
+  <nav class="rc-section-nav" aria-label="资源中心内容"><a href="#components">基础组件</a><a href="#page-samples">页面样例</a></nav>
+  <section id="components" class="rc-controls" aria-label="组件筛选"><div class="rc-filters"><button class="rc-filter is-active" data-group="全部">全部</button><button class="rc-filter" data-group="操作">操作</button><button class="rc-filter" data-group="表单">表单</button><button class="rc-filter" data-group="数据展示">数据展示</button><button class="rc-filter" data-group="布局">布局</button><button class="rc-filter" data-group="反馈">反馈</button></div><label class="rc-search"><span aria-hidden="true">⌕</span><input id="rc-search" type="search" placeholder="搜索基础组件" aria-label="搜索基础组件"></label></section>
+  <div class="rc-results"><span id="rc-count">22 个基础组件</span><span>预览直接使用 tokens.css 与 components.css</span></div>
+  <section class="rc-grid" id="rc-grid"><article class="rc-component vc-card" data-component-card="true" data-component-group="操作" data-search="操作 按钮 主操作、普通操作、文字操作和禁用状态">
+  <header class="rc-component-head"><div><span class="rc-component-group">操作</span><h2>按钮</h2></div><span class="rc-component-mark">VC</span></header>
+  <p class="rc-component-desc">主操作、普通操作、文字操作和禁用状态</p>
+  <div class="rc-preview"><button class="vc-btn vc-btn--primary">保存</button> <button class="vc-btn">取消</button> <button class="vc-btn vc-btn--text">编辑</button> <button class="vc-btn" disabled>禁用</button></div>
+  <details class="rc-usage"><summary>查看 HTML 结构</summary><pre><code>&lt;button class=&quot;vc-btn vc-btn--primary&quot;&gt;保存&lt;/button&gt; &lt;button class=&quot;vc-btn&quot;&gt;取消&lt;/button&gt; &lt;button class=&quot;vc-btn vc-btn--text&quot;&gt;编辑&lt;/button&gt; &lt;button class=&quot;vc-btn&quot; disabled&gt;禁用&lt;/button&gt;</code></pre></details>
+</article><article class="rc-component vc-card" data-component-card="true" data-component-group="操作" data-search="操作 下拉菜单 收纳次要操作">
+  <header class="rc-component-head"><div><span class="rc-component-group">操作</span><h2>下拉菜单</h2></div><span class="rc-component-mark">VC</span></header>
+  <p class="rc-component-desc">收纳次要操作</p>
+  <div class="rc-preview"><div class="vc-dropdown"><button class="vc-dropdown__trigger" aria-expanded="true">更多操作 <i class="vc-dropdown__caret"></i></button><div class="vc-dropdown__menu"><button class="vc-dropdown__item">复制</button><button class="vc-dropdown__item">停用</button></div></div></div>
+  <details class="rc-usage"><summary>查看 HTML 结构</summary><pre><code>&lt;div class=&quot;vc-dropdown&quot;&gt;&lt;button class=&quot;vc-dropdown__trigger&quot; aria-expanded=&quot;true&quot;&gt;更多操作 &lt;i class=&quot;vc-dropdown__caret&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;div class=&quot;vc-dropdown__menu&quot;&gt;&lt;button class=&quot;vc-dropdown__item&quot;&gt;复制&lt;/button&gt;&lt;button class=&quot;vc-dropdown__item&quot;&gt;停用&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;</code></pre></details>
+</article><article class="rc-component vc-card" data-component-card="true" data-component-group="表单" data-search="表单 文本输入框 单行输入、占位提示与禁用态">
+  <header class="rc-component-head"><div><span class="rc-component-group">表单</span><h2>文本输入框</h2></div><span class="rc-component-mark">VC</span></header>
+  <p class="rc-component-desc">单行输入、占位提示与禁用态</p>
+  <div class="rc-preview"><label class="vc-field"><span class="vc-field__label">智能体名称</span><input class="vc-input" value="设备巡检助手" placeholder="请输入名称"></label><label class="vc-field"><span class="vc-field__label">只读字段</span><input class="vc-input" value="AGT-0248" disabled></label></div>
+  <details class="rc-usage"><summary>查看 HTML 结构</summary><pre><code>&lt;label class=&quot;vc-field&quot;&gt;&lt;span class=&quot;vc-field__label&quot;&gt;智能体名称&lt;/span&gt;&lt;input class=&quot;vc-input&quot; value=&quot;设备巡检助手&quot; placeholder=&quot;请输入名称&quot;&gt;&lt;/label&gt;&lt;label class=&quot;vc-field&quot;&gt;&lt;span class=&quot;vc-field__label&quot;&gt;只读字段&lt;/span&gt;&lt;input class=&quot;vc-input&quot; value=&quot;AGT-0248&quot; disabled&gt;&lt;/label&gt;</code></pre></details>
+</article><article class="rc-component vc-card" data-component-card="true" data-component-group="表单" data-search="表单 下拉选择框 单选下拉输入">
+  <header class="rc-component-head"><div><span class="rc-component-group">表单</span><h2>下拉选择框</h2></div><span class="rc-component-mark">VC</span></header>
+  <p class="rc-component-desc">单选下拉输入</p>
+  <div class="rc-preview"><label class="vc-field"><span class="vc-field__label">运行环境</span><select class="vc-select"><option>请选择</option><option selected>生产环境</option><option>测试环境</option></select></label></div>
+  <details class="rc-usage"><summary>查看 HTML 结构</summary><pre><code>&lt;label class=&quot;vc-field&quot;&gt;&lt;span class=&quot;vc-field__label&quot;&gt;运行环境&lt;/span&gt;&lt;select class=&quot;vc-select&quot;&gt;&lt;option&gt;请选择&lt;/option&gt;&lt;option selected&gt;生产环境&lt;/option&gt;&lt;option&gt;测试环境&lt;/option&gt;&lt;/select&gt;&lt;/label&gt;</code></pre></details>
+</article><article class="rc-component vc-card" data-component-card="true" data-component-group="表单" data-search="表单 多行文本框 长文本描述和备注输入">
+  <header class="rc-component-head"><div><span class="rc-component-group">表单</span><h2>多行文本框</h2></div><span class="rc-component-mark">VC</span></header>
+  <p class="rc-component-desc">长文本描述和备注输入</p>
+  <div class="rc-preview"><label class="vc-field"><span class="vc-field__label">用途说明</span><textarea class="vc-textarea" rows="3">汇总巡检记录并识别待处理异常</textarea></label></div>
+  <details class="rc-usage"><summary>查看 HTML 结构</summary><pre><code>&lt;label class=&quot;vc-field&quot;&gt;&lt;span class=&quot;vc-field__label&quot;&gt;用途说明&lt;/span&gt;&lt;textarea class=&quot;vc-textarea&quot; rows=&quot;3&quot;&gt;汇总巡检记录并识别待处理异常&lt;/textarea&gt;&lt;/label&gt;</code></pre></details>
+</article><article class="rc-component vc-card" data-component-card="true" data-component-group="表单" data-search="表单 复选框 多项勾选">
+  <header class="rc-component-head"><div><span class="rc-component-group">表单</span><h2>复选框</h2></div><span class="rc-component-mark">VC</span></header>
+  <p class="rc-component-desc">多项勾选</p>
+  <div class="rc-preview"><div class="vc-check-group"><label><input type="checkbox" checked> 设备巡检</label><label><input type="checkbox"> 异常识别</label><label><input type="checkbox" disabled> 预测分析</label></div></div>
+  <details class="rc-usage"><summary>查看 HTML 结构</summary><pre><code>&lt;div class=&quot;vc-check-group&quot;&gt;&lt;label&gt;&lt;input type=&quot;checkbox&quot; checked&gt; 设备巡检&lt;/label&gt;&lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt; 异常识别&lt;/label&gt;&lt;label&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; 预测分析&lt;/label&gt;&lt;/div&gt;</code></pre></details>
+</article><article class="rc-component vc-card" data-component-card="true" data-component-group="表单" data-search="表单 单选框 互斥选项">
+  <header class="rc-component-head"><div><span class="rc-component-group">表单</span><h2>单选框</h2></div><span class="rc-component-mark">VC</span></header>
+  <p class="rc-component-desc">互斥选项</p>
+  <div class="rc-preview"><div class="vc-radio-group"><label><input type="radio" name="gallery-radio" checked> 自动运行</label><label><input type="radio" name="gallery-radio"> 人工确认</label></div></div>
+  <details class="rc-usage"><summary>查看 HTML 结构</summary><pre><code>&lt;div class=&quot;vc-radio-group&quot;&gt;&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;gallery-radio&quot; checked&gt; 自动运行&lt;/label&gt;&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;gallery-radio&quot;&gt; 人工确认&lt;/label&gt;&lt;/div&gt;</code></pre></details>
+</article><article class="rc-component vc-card" data-component-card="true" data-component-group="表单" data-search="表单 开关 启用与停用状态">
+  <header class="rc-component-head"><div><span class="rc-component-group">表单</span><h2>开关</h2></div><span class="rc-component-mark">VC</span></header>
+  <p class="rc-component-desc">启用与停用状态</p>
+  <div class="rc-preview"><div class="rc-inline"><span>启用智能体</span><button class="vc-switch is-on" type="button" aria-label="已启用"></button><span>已启用</span></div></div>
+  <details class="rc-usage"><summary>查看 HTML 结构</summary><pre><code>&lt;div class=&quot;rc-inline&quot;&gt;&lt;span&gt;启用智能体&lt;/span&gt;&lt;button class=&quot;vc-switch is-on&quot; type=&quot;button&quot; aria-label=&quot;已启用&quot;&gt;&lt;/button&gt;&lt;span&gt;已启用&lt;/span&gt;&lt;/div&gt;</code></pre></details>
+</article><article class="rc-component vc-card" data-component-card="true" data-component-group="表单" data-search="表单 日期选择 日期与时间范围输入触发器">
+  <header class="rc-component-head"><div><span class="rc-component-group">表单</span><h2>日期选择</h2></div><span class="rc-component-mark">VC</span></header>
+  <p class="rc-component-desc">日期与时间范围输入触发器</p>
+  <div class="rc-preview"><button class="vc-datepicker__trigger" type="button">2026-10-01　至　2026-10-29</button></div>
+  <details class="rc-usage"><summary>查看 HTML 结构</summary><pre><code>&lt;button class=&quot;vc-datepicker__trigger&quot; type=&quot;button&quot;&gt;2026-10-01　至　2026-10-29&lt;/button&gt;</code></pre></details>
+</article><article class="rc-component vc-card" data-component-card="true" data-component-group="表单" data-search="表单 文件上传 上传入口与文件状态">
+  <header class="rc-component-head"><div><span class="rc-component-group">表单</span><h2>文件上传</h2></div><span class="rc-component-mark">VC</span></header>
+  <p class="rc-component-desc">上传入口与文件状态</p>
+  <div class="rc-preview"><button class="vc-upload__drop" type="button"><b>选择文件或拖放到此处</b><span>支持常见文档格式</span></button><ul class="vc-upload__list"><li class="vc-upload__item vc-upload__item--ok"><span class="vc-upload__name">巡检规范.docx</span><span class="vc-upload__size">248 KB</span><span class="vc-upload__state vc-upload__state--ok">已完成</span></li></ul></div>
+  <details class="rc-usage"><summary>查看 HTML 结构</summary><pre><code>&lt;button class=&quot;vc-upload__drop&quot; type=&quot;button&quot;&gt;&lt;b&gt;选择文件或拖放到此处&lt;/b&gt;&lt;span&gt;支持常见文档格式&lt;/span&gt;&lt;/button&gt;&lt;ul class=&quot;vc-upload__list&quot;&gt;&lt;li class=&quot;vc-upload__item vc-upload__item--ok&quot;&gt;&lt;span class=&quot;vc-upload__name&quot;&gt;巡检规范.docx&lt;/span&gt;&lt;span class=&quot;vc-upload__size&quot;&gt;248 KB&lt;/span&gt;&lt;span class=&quot;vc-upload__state vc-upload__state--ok&quot;&gt;已完成&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;</code></pre></details>
+</article><article class="rc-component vc-card" data-component-card="true" data-component-group="数据展示" data-search="数据展示 状态标签 以文字和颜色共同表达业务状态">
+  <header class="rc-component-head"><div><span class="rc-component-group">数据展示</span><h2>状态标签</h2></div><span class="rc-component-mark">VC</span></header>
+  <p class="rc-component-desc">以文字和颜色共同表达业务状态</p>
+  <div class="rc-preview"><span class="vc-tag vc-tag--ok">运行中</span> <span class="vc-tag vc-tag--warn">待确认</span> <span class="vc-tag vc-tag--err">异常</span> <span class="vc-tag vc-tag--muted">已停用</span></div>
+  <details class="rc-usage"><summary>查看 HTML 结构</summary><pre><code>&lt;span class=&quot;vc-tag vc-tag--ok&quot;&gt;运行中&lt;/span&gt; &lt;span class=&quot;vc-tag vc-tag--warn&quot;&gt;待确认&lt;/span&gt; &lt;span class=&quot;vc-tag vc-tag--err&quot;&gt;异常&lt;/span&gt; &lt;span class=&quot;vc-tag vc-tag--muted&quot;&gt;已停用&lt;/span&gt;</code></pre></details>
+</article><article class="rc-component vc-card" data-component-card="true" data-component-group="数据展示" data-search="数据展示 徽标 数量或轻量状态提示">
+  <header class="rc-component-head"><div><span class="rc-component-group">数据展示</span><h2>徽标</h2></div><span class="rc-component-mark">VC</span></header>
+  <p class="rc-component-desc">数量或轻量状态提示</p>
+  <div class="rc-preview"><span class="vc-badge">待处理 8</span></div>
+  <details class="rc-usage"><summary>查看 HTML 结构</summary><pre><code>&lt;span class=&quot;vc-badge&quot;&gt;待处理 8&lt;/span&gt;</code></pre></details>
+</article><article class="rc-component vc-card" data-component-card="true" data-component-group="数据展示" data-search="数据展示 数据表格 表头、数据行、状态和行操作">
+  <header class="rc-component-head"><div><span class="rc-component-group">数据展示</span><h2>数据表格</h2></div><span class="rc-component-mark">VC</span></header>
+  <p class="rc-component-desc">表头、数据行、状态和行操作</p>
+  <div class="rc-preview"><div class="vc-table__wrap"><table class="vc-table" style="--table-min:560px"><thead><tr><th>组件名称</th><th>所属模块</th><th>状态</th><th>操作</th></tr></thead><tbody><tr><td>设备巡检助手</td><td>智能体工厂</td><td><span class="vc-tag vc-tag--ok">运行中</span></td><td><button class="vc-btn vc-btn--text">编辑</button></td></tr><tr><td>异常分析助手</td><td>智能体工厂</td><td><span class="vc-tag vc-tag--warn">待发布</span></td><td><button class="vc-btn vc-btn--text">编辑</button></td></tr></tbody></table></div></div>
+  <details class="rc-usage"><summary>查看 HTML 结构</summary><pre><code>&lt;div class=&quot;vc-table__wrap&quot;&gt;&lt;table class=&quot;vc-table&quot; style=&quot;--table-min:560px&quot;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;组件名称&lt;/th&gt;&lt;th&gt;所属模块&lt;/th&gt;&lt;th&gt;状态&lt;/th&gt;&lt;th&gt;操作&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;设备巡检助手&lt;/td&gt;&lt;td&gt;智能体工厂&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;vc-tag vc-tag--ok&quot;&gt;运行中&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;vc-btn vc-btn--text&quot;&gt;编辑&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;异常分析助手&lt;/td&gt;&lt;td&gt;智能体工厂&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;vc-tag vc-tag--warn&quot;&gt;待发布&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;vc-btn vc-btn--text&quot;&gt;编辑&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;</code></pre></details>
+</article><article class="rc-component vc-card" data-component-card="true" data-component-group="数据展示" data-search="数据展示 分页器 表格分页与每页数量">
+  <header class="rc-component-head"><div><span class="rc-component-group">数据展示</span><h2>分页器</h2></div><span class="rc-component-mark">VC</span></header>
+  <p class="rc-component-desc">表格分页与每页数量</p>
+  <div class="rc-preview"><div class="vc-pager"><span class="vc-pager__total">共 38 条</span><div class="vc-pager__right"><select class="vc-pager__size"><option>10 条/页</option></select><button class="vc-pager__btn" disabled>上一页</button><button class="vc-pager__btn is-current">1</button><button class="vc-pager__btn">2</button><button class="vc-pager__btn">下一页</button></div></div></div>
+  <details class="rc-usage"><summary>查看 HTML 结构</summary><pre><code>&lt;div class=&quot;vc-pager&quot;&gt;&lt;span class=&quot;vc-pager__total&quot;&gt;共 38 条&lt;/span&gt;&lt;div class=&quot;vc-pager__right&quot;&gt;&lt;select class=&quot;vc-pager__size&quot;&gt;&lt;option&gt;10 条/页&lt;/option&gt;&lt;/select&gt;&lt;button class=&quot;vc-pager__btn&quot; disabled&gt;上一页&lt;/button&gt;&lt;button class=&quot;vc-pager__btn is-current&quot;&gt;1&lt;/button&gt;&lt;button class=&quot;vc-pager__btn&quot;&gt;2&lt;/button&gt;&lt;button class=&quot;vc-pager__btn&quot;&gt;下一页&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;</code></pre></details>
+</article><article class="rc-component vc-card" data-component-card="true" data-component-group="数据展示" data-search="数据展示 信息卡片 标题、关键数值与说明">
+  <header class="rc-component-head"><div><span class="rc-component-group">数据展示</span><h2>信息卡片</h2></div><span class="rc-component-mark">VC</span></header>
+  <p class="rc-component-desc">标题、关键数值与说明</p>
+  <div class="rc-preview"><article class="vc-stat"><span class="vc-stat__label">本月调用量</span><strong class="vc-stat__value">12,840</strong><span class="vc-stat__delta">较上月 +8.6%</span></article></div>
+  <details class="rc-usage"><summary>查看 HTML 结构</summary><pre><code>&lt;article class=&quot;vc-stat&quot;&gt;&lt;span class=&quot;vc-stat__label&quot;&gt;本月调用量&lt;/span&gt;&lt;strong class=&quot;vc-stat__value&quot;&gt;12,840&lt;/strong&gt;&lt;span class=&quot;vc-stat__delta&quot;&gt;较上月 +8.6%&lt;/span&gt;&lt;/article&gt;</code></pre></details>
+</article><article class="rc-component vc-card" data-component-card="true" data-component-group="数据展示" data-search="数据展示 进度条 任务或配额完成比例">
+  <header class="rc-component-head"><div><span class="rc-component-group">数据展示</span><h2>进度条</h2></div><span class="rc-component-mark">VC</span></header>
+  <p class="rc-component-desc">任务或配额完成比例</p>
+  <div class="rc-preview"><div class="rc-progress-demo"><div class="vc-progress"><div class="vc-progress__bar" style="width:68%"></div></div><span>68%</span></div></div>
+  <details class="rc-usage"><summary>查看 HTML 结构</summary><pre><code>&lt;div class=&quot;rc-progress-demo&quot;&gt;&lt;div class=&quot;vc-progress&quot;&gt;&lt;div class=&quot;vc-progress__bar&quot; style=&quot;width:68%&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;span&gt;68%&lt;/span&gt;&lt;/div&gt;</code></pre></details>
+</article><article class="rc-component vc-card" data-component-card="true" data-component-group="数据展示" data-search="数据展示 描述列表 查看对象的键值信息">
+  <header class="rc-component-head"><div><span class="rc-component-group">数据展示</span><h2>描述列表</h2></div><span class="rc-component-mark">VC</span></header>
+  <p class="rc-component-desc">查看对象的键值信息</p>
+  <div class="rc-preview"><dl class="vc-desc vc-desc--2"><div class="vc-desc__item"><dt class="vc-desc__k">智能体名称</dt><dd class="vc-desc__v">设备巡检助手</dd></div><div class="vc-desc__item"><dt class="vc-desc__k">运行状态</dt><dd class="vc-desc__v">运行中</dd></div></dl></div>
+  <details class="rc-usage"><summary>查看 HTML 结构</summary><pre><code>&lt;dl class=&quot;vc-desc vc-desc--2&quot;&gt;&lt;div class=&quot;vc-desc__item&quot;&gt;&lt;dt class=&quot;vc-desc__k&quot;&gt;智能体名称&lt;/dt&gt;&lt;dd class=&quot;vc-desc__v&quot;&gt;设备巡检助手&lt;/dd&gt;&lt;/div&gt;&lt;div class=&quot;vc-desc__item&quot;&gt;&lt;dt class=&quot;vc-desc__k&quot;&gt;运行状态&lt;/dt&gt;&lt;dd class=&quot;vc-desc__v&quot;&gt;运行中&lt;/dd&gt;&lt;/div&gt;&lt;/dl&gt;</code></pre></details>
+</article><article class="rc-component vc-card" data-component-card="true" data-component-group="布局" data-search="布局 页签 同一对象下切换关联视图">
+  <header class="rc-component-head"><div><span class="rc-component-group">布局</span><h2>页签</h2></div><span class="rc-component-mark">VC</span></header>
+  <p class="rc-component-desc">同一对象下切换关联视图</p>
+  <div class="rc-preview"><div class="vc-tabs"><button class="vc-tabs__item vc-tabs__item--active">基本信息</button><button class="vc-tabs__item">运行记录</button><button class="vc-tabs__item">版本历史</button></div></div>
+  <details class="rc-usage"><summary>查看 HTML 结构</summary><pre><code>&lt;div class=&quot;vc-tabs&quot;&gt;&lt;button class=&quot;vc-tabs__item vc-tabs__item--active&quot;&gt;基本信息&lt;/button&gt;&lt;button class=&quot;vc-tabs__item&quot;&gt;运行记录&lt;/button&gt;&lt;button class=&quot;vc-tabs__item&quot;&gt;版本历史&lt;/button&gt;&lt;/div&gt;</code></pre></details>
+</article><article class="rc-component vc-card" data-component-card="true" data-component-group="布局" data-search="布局 步骤条 展示分步骤流程进度">
+  <header class="rc-component-head"><div><span class="rc-component-group">布局</span><h2>步骤条</h2></div><span class="rc-component-mark">VC</span></header>
+  <p class="rc-component-desc">展示分步骤流程进度</p>
+  <div class="rc-preview"><ol class="vc-steps"><li class="is-done"><span class="vc-steps__no">01</span><span class="vc-steps__name">配置</span></li><li class="is-active"><span class="vc-steps__no">02</span><span class="vc-steps__name">预览</span></li><li><span class="vc-steps__no">03</span><span class="vc-steps__name">发布</span></li></ol></div>
+  <details class="rc-usage"><summary>查看 HTML 结构</summary><pre><code>&lt;ol class=&quot;vc-steps&quot;&gt;&lt;li class=&quot;is-done&quot;&gt;&lt;span class=&quot;vc-steps__no&quot;&gt;01&lt;/span&gt;&lt;span class=&quot;vc-steps__name&quot;&gt;配置&lt;/span&gt;&lt;/li&gt;&lt;li class=&quot;is-active&quot;&gt;&lt;span class=&quot;vc-steps__no&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;vc-steps__name&quot;&gt;预览&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span class=&quot;vc-steps__no&quot;&gt;03&lt;/span&gt;&lt;span class=&quot;vc-steps__name&quot;&gt;发布&lt;/span&gt;&lt;/li&gt;&lt;/ol&gt;</code></pre></details>
+</article><article class="rc-component vc-card" data-component-card="true" data-component-group="反馈" data-search="反馈 提示条 成功、错误等页内提示">
+  <header class="rc-component-head"><div><span class="rc-component-group">反馈</span><h2>提示条</h2></div><span class="rc-component-mark">VC</span></header>
+  <p class="rc-component-desc">成功、错误等页内提示</p>
+  <div class="rc-preview"><div class="vc-alert vc-alert--ok">配置已通过校验。</div><div class="vc-alert vc-alert--err">连接失败，请检查配置后重试。</div></div>
+  <details class="rc-usage"><summary>查看 HTML 结构</summary><pre><code>&lt;div class=&quot;vc-alert vc-alert--ok&quot;&gt;配置已通过校验。&lt;/div&gt;&lt;div class=&quot;vc-alert vc-alert--err&quot;&gt;连接失败，请检查配置后重试。&lt;/div&gt;</code></pre></details>
+</article><article class="rc-component vc-card" data-component-card="true" data-component-group="反馈" data-search="反馈 空态、加载与异常态 为数据区提供清晰状态和下一步提示">
+  <header class="rc-component-head"><div><span class="rc-component-group">反馈</span><h2>空态、加载与异常态</h2></div><span class="rc-component-mark">VC</span></header>
+  <p class="rc-component-desc">为数据区提供清晰状态和下一步提示</p>
+  <div class="rc-preview"><div class="vc-state"><strong class="vc-state__title">暂无数据</strong><span class="vc-state__hint">调整筛选条件后重试。</span></div><div class="vc-state vc-state--loading"><strong class="vc-state__title">正在加载</strong><span class="vc-state__hint">请稍候…</span></div></div>
+  <details class="rc-usage"><summary>查看 HTML 结构</summary><pre><code>&lt;div class=&quot;vc-state&quot;&gt;&lt;strong class=&quot;vc-state__title&quot;&gt;暂无数据&lt;/strong&gt;&lt;span class=&quot;vc-state__hint&quot;&gt;调整筛选条件后重试。&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;vc-state vc-state--loading&quot;&gt;&lt;strong class=&quot;vc-state__title&quot;&gt;正在加载&lt;/strong&gt;&lt;span class=&quot;vc-state__hint&quot;&gt;请稍候…&lt;/span&gt;&lt;/div&gt;</code></pre></details>
+</article><article class="rc-component vc-card" data-component-card="true" data-component-group="反馈" data-search="反馈 骨架屏 内容加载前预留版面">
+  <header class="rc-component-head"><div><span class="rc-component-group">反馈</span><h2>骨架屏</h2></div><span class="rc-component-mark">VC</span></header>
+  <p class="rc-component-desc">内容加载前预留版面</p>
+  <div class="rc-preview"><div class="vc-skeleton"><span class="vc-skeleton__line"></span><span class="vc-skeleton__line vc-skeleton__line--w80"></span><span class="vc-skeleton__line vc-skeleton__line--w60"></span></div></div>
+  <details class="rc-usage"><summary>查看 HTML 结构</summary><pre><code>&lt;div class=&quot;vc-skeleton&quot;&gt;&lt;span class=&quot;vc-skeleton__line&quot;&gt;&lt;/span&gt;&lt;span class=&quot;vc-skeleton__line vc-skeleton__line--w80&quot;&gt;&lt;/span&gt;&lt;span class=&quot;vc-skeleton__line vc-skeleton__line--w60&quot;&gt;&lt;/span&gt;&lt;/div&gt;</code></pre></details>
+</article></section>
+  <div class="rc-empty" id="rc-empty" hidden>没有匹配的基础组件。</div>
+  <section class="rc-page-samples" id="page-samples"><header class="rc-samples-head"><div><span class="rc-kicker">PAGE PATTERNS</span><h2>页面样例</h2><p>参考基础组件在实际原型中的组合、信息密度与页面结构。</p></div><span>3 个现有原型</span></header><div class="rc-sample-grid"><article class="rc-sample vc-card" data-page-sample="true" data-sample-path="../../prototype/德清威德L4技改_菜单页_V0.1.html">
+  <header><div><span class="rc-component-group">统一框架</span><h2>菜单页</h2></div><a class="vc-btn vc-btn--text" href="../../prototype/德清威德L4技改_菜单页_V0.1.html" target="_blank" rel="noopener">独立打开</a></header>
+  <p class="rc-component-desc">展示全局导航、二级菜单和内容区框架。</p>
+  <div class="rc-sample-frame"><iframe src="../../prototype/德清威德L4技改_菜单页_V0.1.html" loading="lazy" title="菜单页页面样例"></iframe></div>
+</article><article class="rc-sample vc-card" data-page-sample="true" data-sample-path="../../prototype/训练工厂/智驾_工厂管理_V0.1.html">
+  <header><div><span class="rc-component-group">单 HTML 多视图</span><h2>工厂管理（列表 / 详情 / 表单）</h2></div><a class="vc-btn vc-btn--text" href="../../prototype/训练工厂/智驾_工厂管理_V0.1.html" target="_blank" rel="noopener">独立打开</a></header>
+  <p class="rc-component-desc">列表中点击工厂记录可切换到详情；列表、详情和表单视图共用同一 HTML。</p>
+  <div class="rc-sample-frame"><iframe src="../../prototype/训练工厂/智驾_工厂管理_V0.1.html" loading="lazy" title="工厂管理（列表 / 详情 / 表单）页面样例"></iframe></div>
+</article><article class="rc-sample vc-card" data-page-sample="true" data-sample-path="../../prototype/生成Agent工作台/智驾_生成Agent工作台_V0.1.html">
+  <header><div><span class="rc-component-group">工作台</span><h2>生成Agent工作台</h2></div><a class="vc-btn vc-btn--text" href="../../prototype/生成Agent工作台/智驾_生成Agent工作台_V0.1.html" target="_blank" rel="noopener">独立打开</a></header>
+  <p class="rc-component-desc">展示任务入口、生成流程与工作区布局。</p>
+  <div class="rc-sample-frame"><iframe src="../../prototype/生成Agent工作台/智驾_生成Agent工作台_V0.1.html" loading="lazy" title="生成Agent工作台页面样例"></iframe></div>
+</article></div></section>
+  <footer class="rc-footer">组件样式唯一来源：<code>assets/components/components.css</code>　令牌来源：<code>assets/components/tokens.css</code></footer>
+</main>
+<script>
+(function () {
+  var group = '全部', search = document.getElementById('rc-search');
+  var cards = Array.from(document.querySelectorAll('.rc-component'));
+  var count = document.getElementById('rc-count'), empty = document.getElementById('rc-empty');
+  function update() {
+    var query = search.value.trim().toLowerCase(), visible = 0;
+    cards.forEach(function (card) {
+      var matches = (group === '全部' || card.dataset.componentGroup === group) && card.dataset.search.toLowerCase().includes(query);
+      card.hidden = !matches; if (matches) visible++;
+    });
+    count.textContent = visible + ' 个基础组件'; empty.hidden = visible > 0;
+  }
+  document.querySelectorAll('[data-group]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      group = button.dataset.group;
+      document.querySelectorAll('[data-group]').forEach(function (item) { item.classList.toggle('is-active', item === button); });
+      update();
+    });
+  });
+  search.addEventListener('input', update);
+})();
+</script>
+</body></html>

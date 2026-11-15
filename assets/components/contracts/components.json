@@ -1,0 +1,2221 @@
+{
+  "version": "veridix-component-contracts-v1",
+  "baseline": "veridix-component-baseline-v1",
+  "updated": "2026-10-29",
+  "source": "assets/components/components.css",
+  "inventory": {
+    "classes": 344,
+    "owners": 44,
+    "unowned": 0,
+    "dead": 0,
+    "missing": 0
+  },
+  "naming": {
+    "root": "vc-<component>",
+    "part": "vc-<component>__<part>",
+    "variant": "vc-<component>--<variant>（每个组件 ≤4 个）",
+    "state": "is-<state>；只用 is-hidden / is-active / is-current / is-open",
+    "rootAttribute": "data-component=\"<component|block>\""
+  },
+  "owners": {
+    "actionbar": {
+      "classes": [
+        "vc-actionbar",
+        "vc-actionbar--static",
+        "vc-actionbar__hint",
+        "vc-actionbar__ops"
+      ],
+      "category": "pattern",
+      "status": "core",
+      "description": "固定操作条",
+      "root": "vc-actionbar",
+      "parts": [
+        "hint",
+        "ops"
+      ],
+      "variants": [
+        "static"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "actionbar"
+      }
+    },
+    "chat": {
+      "classes": [
+        "vc-agentbar",
+        "vc-agentbar__ctx",
+        "vc-agentbar__mark",
+        "vc-agentbar__name",
+        "vc-agentbar__sub",
+        "vc-ask",
+        "vc-ask__opt",
+        "vc-bind",
+        "vc-bind__field",
+        "vc-bind__state",
+        "vc-chat",
+        "vc-chat__ava",
+        "vc-chat__bubble",
+        "vc-chat__dots",
+        "vc-chat__main",
+        "vc-chat__meta",
+        "vc-chat__note",
+        "vc-chat__row",
+        "vc-chat__row--me",
+        "vc-chip",
+        "vc-chip--bad",
+        "vc-chip--ref",
+        "vc-chip__ico",
+        "vc-chip__name",
+        "vc-chip__size",
+        "vc-chip__thumb",
+        "vc-chip__x",
+        "vc-composer",
+        "vc-composer__atts",
+        "vc-composer__bar",
+        "vc-composer__hint",
+        "vc-composer__meta",
+        "vc-composer__send",
+        "vc-composer__send--stop",
+        "vc-drop",
+        "vc-drop__box",
+        "vc-icon-btn",
+        "vc-icon-btn__count",
+        "vc-line",
+        "vc-line__body",
+        "vc-line__card",
+        "vc-line__cover",
+        "vc-line__desc",
+        "vc-line__ghost",
+        "vc-line__led",
+        "vc-line__node",
+        "vc-line__st",
+        "vc-line__tag",
+        "vc-line__title",
+        "vc-opt",
+        "vc-opt__d",
+        "vc-opt__go",
+        "vc-opt__ico",
+        "vc-opt__t",
+        "vc-parse",
+        "vc-parse--fail",
+        "vc-parse--wait",
+        "vc-parse__ent",
+        "vc-parse__head",
+        "vc-parse__meta",
+        "vc-parse__name",
+        "vc-parse__ops",
+        "vc-parse__type",
+        "vc-scroller",
+        "vc-scroller__item",
+        "vc-work"
+      ],
+      "category": "chat",
+      "status": "feature",
+      "description": "会话与产线特性块",
+      "root": "vc-chat",
+      "parts": [
+        "atts",
+        "ava",
+        "bar",
+        "body",
+        "box",
+        "bubble",
+        "card",
+        "count",
+        "cover",
+        "ctx",
+        "d",
+        "desc",
+        "dots",
+        "ent",
+        "field",
+        "ghost",
+        "go",
+        "head",
+        "hint",
+        "ico",
+        "item",
+        "led",
+        "main",
+        "mark",
+        "meta",
+        "name",
+        "node",
+        "note",
+        "ops",
+        "opt",
+        "row",
+        "row--me",
+        "send",
+        "send--stop",
+        "size",
+        "st",
+        "state",
+        "sub",
+        "t",
+        "tag",
+        "thumb",
+        "title",
+        "type",
+        "x"
+      ],
+      "variants": [
+        "bad",
+        "fail",
+        "me",
+        "ref",
+        "stop",
+        "wait"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "chat"
+      }
+    },
+    "alert": {
+      "classes": [
+        "vc-alert",
+        "vc-alert--err",
+        "vc-alert--ok",
+        "vc-alert--warn",
+        "vc-note"
+      ],
+      "category": "feedback",
+      "status": "core",
+      "description": "提示条",
+      "root": "vc-alert",
+      "parts": [],
+      "variants": [
+        "err",
+        "ok",
+        "warn"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "alert"
+      }
+    },
+    "pagehead": {
+      "classes": [
+        "vc-back",
+        "vc-pagehead",
+        "vc-pagehead--bar",
+        "vc-pagehead__desc",
+        "vc-pagehead__ops"
+      ],
+      "category": "pattern",
+      "status": "core",
+      "description": "页面头",
+      "root": "vc-pagehead",
+      "parts": [
+        "desc",
+        "ops"
+      ],
+      "variants": [
+        "bar"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "pagehead"
+      }
+    },
+    "badge": {
+      "classes": [
+        "vc-badge"
+      ],
+      "category": "data",
+      "status": "core",
+      "description": "徽标",
+      "root": "vc-badge",
+      "parts": [],
+      "variants": [],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "badge"
+      }
+    },
+    "btn": {
+      "classes": [
+        "vc-btn",
+        "vc-btn--block",
+        "vc-btn--brand",
+        "vc-btn--danger",
+        "vc-btn--lg",
+        "vc-btn--primary",
+        "vc-btn--sm",
+        "vc-btn--text"
+      ],
+      "category": "action",
+      "status": "core",
+      "description": "按钮",
+      "root": "vc-btn",
+      "parts": [],
+      "variants": [
+        "block",
+        "brand",
+        "danger",
+        "lg",
+        "primary",
+        "sm",
+        "text"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "btn"
+      }
+    },
+    "layout": {
+      "classes": [
+        "vc-canvas",
+        "vc-canvas--actionbar",
+        "vc-rail",
+        "vc-rail--loose",
+        "vc-rail--static",
+        "vc-rail__head",
+        "vc-section",
+        "vc-split",
+        "vc-split--aside",
+        "vc-split__main",
+        "vc-split__side",
+        "vc-split__side--loose",
+        "vc-split__side--sticky",
+        "vc-stack"
+      ],
+      "category": "layout",
+      "status": "foundation",
+      "description": "布局与区块容器",
+      "root": "vc-canvas",
+      "parts": [
+        "head",
+        "main",
+        "side",
+        "side--loose",
+        "side--sticky"
+      ],
+      "variants": [
+        "actionbar",
+        "aside",
+        "loose",
+        "static",
+        "sticky"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {}
+    },
+    "card": {
+      "classes": [
+        "vc-card",
+        "vc-card--app",
+        "vc-card--plan",
+        "vc-card__desc",
+        "vc-card__foot",
+        "vc-card__head",
+        "vc-card__mark",
+        "vc-card__ops"
+      ],
+      "category": "data",
+      "status": "core",
+      "description": "卡片",
+      "root": "vc-card",
+      "parts": [
+        "desc",
+        "foot",
+        "head",
+        "mark",
+        "ops"
+      ],
+      "variants": [
+        "app",
+        "plan"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "card"
+      }
+    },
+    "base": {
+      "classes": [
+        "vc-chamfer",
+        "vc-page"
+      ],
+      "category": "layout",
+      "status": "foundation",
+      "description": "页面基座",
+      "root": "vc-chamfer",
+      "parts": [],
+      "variants": [],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {}
+    },
+    "chart": {
+      "classes": [
+        "vc-chart",
+        "vc-chart__cap"
+      ],
+      "category": "data",
+      "status": "core",
+      "description": "图表容器",
+      "root": "vc-chart",
+      "parts": [
+        "cap"
+      ],
+      "variants": [],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "chart"
+      }
+    },
+    "check": {
+      "classes": [
+        "vc-check",
+        "vc-check--conflict",
+        "vc-check-group",
+        "vc-check-group--col",
+        "vc-check__box",
+        "vc-check__label",
+        "vc-check__note"
+      ],
+      "category": "form",
+      "status": "core",
+      "description": "复选框组",
+      "root": "vc-check",
+      "parts": [
+        "box",
+        "label",
+        "note"
+      ],
+      "variants": [
+        "col",
+        "conflict"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "check"
+      }
+    },
+    "collapse": {
+      "classes": [
+        "vc-collapse",
+        "vc-collapse__body",
+        "vc-collapse__caret",
+        "vc-collapse__count",
+        "vc-collapse__head",
+        "vc-collapse__item",
+        "vc-collapse__title"
+      ],
+      "category": "form",
+      "status": "core",
+      "description": "折叠容器",
+      "root": "vc-collapse",
+      "parts": [
+        "body",
+        "caret",
+        "count",
+        "head",
+        "item",
+        "title"
+      ],
+      "variants": [],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "collapse"
+      }
+    },
+    "shell": {
+      "classes": [
+        "vc-crumb",
+        "vc-crumb__sep",
+        "vc-dot",
+        "vc-dot--teal",
+        "vc-dot--warn",
+        "vc-hex",
+        "vc-led",
+        "vc-led--amber",
+        "vc-led--cyan",
+        "vc-led--red",
+        "vc-nav",
+        "vc-nav__count",
+        "vc-nav__icon",
+        "vc-nav__item",
+        "vc-nav__label",
+        "vc-nav__sub",
+        "vc-nav__text",
+        "vc-topbar",
+        "vc-topbar__mark",
+        "vc-topbar__right",
+        "vc-user__ava"
+      ],
+      "category": "shell",
+      "status": "shell",
+      "description": "门户外壳",
+      "root": "vc-crumb",
+      "parts": [
+        "ava",
+        "count",
+        "icon",
+        "item",
+        "label",
+        "mark",
+        "right",
+        "sep",
+        "sub",
+        "text"
+      ],
+      "variants": [
+        "amber",
+        "cyan",
+        "red",
+        "teal",
+        "warn"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {}
+    },
+    "cut": {
+      "classes": [
+        "vc-cut__title"
+      ],
+      "category": "layout",
+      "status": "deprecated",
+      "description": "旧切角卡（根类已归档，仅保留子类兼容）",
+      "root": "vc-cut__title",
+      "parts": [
+        "title"
+      ],
+      "variants": [],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {}
+    },
+    "datepicker": {
+      "classes": [
+        "vc-datepicker",
+        "vc-datepicker--range",
+        "vc-datepicker__cal",
+        "vc-datepicker__cell",
+        "vc-datepicker__grid",
+        "vc-datepicker__head",
+        "vc-datepicker__nav",
+        "vc-datepicker__panel",
+        "vc-datepicker__quick",
+        "vc-datepicker__sep",
+        "vc-datepicker__trigger",
+        "vc-datepicker__wd"
+      ],
+      "category": "form",
+      "status": "core",
+      "description": "日期与范围",
+      "root": "vc-datepicker",
+      "parts": [
+        "cal",
+        "cell",
+        "grid",
+        "head",
+        "nav",
+        "panel",
+        "quick",
+        "sep",
+        "trigger",
+        "wd"
+      ],
+      "variants": [
+        "range"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "datepicker"
+      }
+    },
+    "detail": {
+      "classes": [
+        "vc-desc",
+        "vc-desc--1",
+        "vc-desc--2",
+        "vc-desc__item",
+        "vc-desc__k",
+        "vc-desc__v",
+        "vc-detail-head",
+        "vc-detail-head__meta"
+      ],
+      "category": "pattern",
+      "status": "core",
+      "description": "详情与描述列表",
+      "root": "vc-desc",
+      "parts": [
+        "item",
+        "k",
+        "meta",
+        "v"
+      ],
+      "variants": [
+        "1",
+        "2"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "detail"
+      }
+    },
+    "divider": {
+      "classes": [
+        "vc-divider",
+        "vc-divider--dashed",
+        "vc-divider--label",
+        "vc-divider__label"
+      ],
+      "category": "layout",
+      "status": "core",
+      "description": "分割线",
+      "root": "vc-divider",
+      "parts": [
+        "label"
+      ],
+      "variants": [
+        "dashed",
+        "label"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "divider"
+      }
+    },
+    "overlay": {
+      "classes": [
+        "vc-drawer",
+        "vc-drawer--narrow",
+        "vc-drawer__body",
+        "vc-drawer__foot",
+        "vc-drawer__head",
+        "vc-drawer__mask",
+        "vc-modal",
+        "vc-modal--narrow",
+        "vc-modal__body",
+        "vc-modal__foot",
+        "vc-modal__head",
+        "vc-modal__mask"
+      ],
+      "category": "feedback",
+      "status": "core",
+      "description": "弹窗与抽屉",
+      "root": "vc-drawer",
+      "parts": [
+        "body",
+        "foot",
+        "head",
+        "mask"
+      ],
+      "variants": [
+        "narrow"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "overlay"
+      }
+    },
+    "dropdown": {
+      "classes": [
+        "vc-dropdown",
+        "vc-dropdown__caret",
+        "vc-dropdown__item",
+        "vc-dropdown__item--danger",
+        "vc-dropdown__menu",
+        "vc-dropdown__sep",
+        "vc-dropdown__text",
+        "vc-dropdown__trigger"
+      ],
+      "category": "action",
+      "status": "core",
+      "description": "下拉菜单",
+      "root": "vc-dropdown",
+      "parts": [
+        "caret",
+        "item",
+        "item--danger",
+        "menu",
+        "sep",
+        "text",
+        "trigger"
+      ],
+      "variants": [
+        "danger"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "dropdown"
+      }
+    },
+    "utility": {
+      "classes": [
+        "vc-ellipsis",
+        "vc-mono",
+        "vc-num-tab"
+      ],
+      "category": "text",
+      "status": "utility",
+      "description": "工具类",
+      "root": "vc-ellipsis",
+      "parts": [],
+      "variants": [],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {}
+    },
+    "field": {
+      "classes": [
+        "vc-field",
+        "vc-field--invalid",
+        "vc-field--span2",
+        "vc-field__err",
+        "vc-field__hint",
+        "vc-field__label",
+        "vc-field__req"
+      ],
+      "category": "form",
+      "status": "core",
+      "description": "表单字段",
+      "root": "vc-field",
+      "parts": [
+        "err",
+        "hint",
+        "label",
+        "req"
+      ],
+      "variants": [
+        "invalid",
+        "span2"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "field"
+      }
+    },
+    "input": {
+      "classes": [
+        "vc-file-input",
+        "vc-input",
+        "vc-input-group",
+        "vc-input-group__icon"
+      ],
+      "category": "form",
+      "status": "core",
+      "description": "输入框",
+      "root": "vc-input",
+      "parts": [
+        "icon"
+      ],
+      "variants": [],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "input"
+      }
+    },
+    "form": {
+      "classes": [
+        "vc-form-actions",
+        "vc-form-grid",
+        "vc-form-page",
+        "vc-group-title"
+      ],
+      "category": "pattern",
+      "status": "core",
+      "description": "表单区块",
+      "root": "vc-form-actions",
+      "parts": [],
+      "variants": [],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "form"
+      }
+    },
+    "gate": {
+      "classes": [
+        "vc-gate",
+        "vc-gate--static",
+        "vc-gate__ack",
+        "vc-gate__facts",
+        "vc-gate__list",
+        "vc-gate__mask",
+        "vc-gate__ops",
+        "vc-gate__warn"
+      ],
+      "category": "feedback",
+      "status": "core",
+      "description": "确认门",
+      "root": "vc-gate",
+      "parts": [
+        "ack",
+        "facts",
+        "list",
+        "mask",
+        "ops",
+        "warn"
+      ],
+      "variants": [
+        "static"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "gate"
+      }
+    },
+    "grid": {
+      "classes": [
+        "vc-grid",
+        "vc-grid--3",
+        "vc-grid--4"
+      ],
+      "category": "layout",
+      "status": "core",
+      "description": "栅格",
+      "root": "vc-grid",
+      "parts": [],
+      "variants": [
+        "3",
+        "4"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "grid"
+      }
+    },
+    "kpi": {
+      "classes": [
+        "vc-kpi",
+        "vc-kpi--amber",
+        "vc-kpi--err",
+        "vc-kpi-row",
+        "vc-kpi-row--mini",
+        "vc-kpi__delta",
+        "vc-kpi__lbl",
+        "vc-stat",
+        "vc-stat__delta",
+        "vc-stat__label",
+        "vc-stat__value"
+      ],
+      "category": "data",
+      "status": "core",
+      "description": "指标卡与指标行",
+      "root": "vc-kpi",
+      "parts": [
+        "delta",
+        "label",
+        "lbl",
+        "value"
+      ],
+      "variants": [
+        "amber",
+        "err",
+        "mini"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "kpi"
+      }
+    },
+    "table": {
+      "classes": [
+        "vc-name",
+        "vc-ops",
+        "vc-section--tight",
+        "vc-table",
+        "vc-table--compact",
+        "vc-table--freeze",
+        "vc-table--num",
+        "vc-table__center",
+        "vc-table__empty",
+        "vc-table__num",
+        "vc-table__ops",
+        "vc-table__state",
+        "vc-table__wrap"
+      ],
+      "category": "pattern",
+      "status": "core",
+      "description": "表格与列表区块",
+      "root": "vc-table",
+      "parts": [
+        "empty",
+        "num",
+        "ops",
+        "state",
+        "wrap"
+      ],
+      "variants": [
+        "compact",
+        "freeze",
+        "num",
+        "tight"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "table"
+      }
+    },
+    "pager": {
+      "classes": [
+        "vc-pager",
+        "vc-pager__btn",
+        "vc-pager__right",
+        "vc-pager__size",
+        "vc-pager__total"
+      ],
+      "category": "data",
+      "status": "core",
+      "description": "分页",
+      "root": "vc-pager",
+      "parts": [
+        "btn",
+        "right",
+        "size",
+        "total"
+      ],
+      "variants": [],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "pager"
+      }
+    },
+    "progress": {
+      "classes": [
+        "vc-progress",
+        "vc-progress__bar"
+      ],
+      "category": "feedback",
+      "status": "core",
+      "description": "进度",
+      "root": "vc-progress",
+      "parts": [
+        "bar"
+      ],
+      "variants": [],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "progress"
+      }
+    },
+    "radio": {
+      "classes": [
+        "vc-radio",
+        "vc-radio-group",
+        "vc-radio-group--col",
+        "vc-radio__box",
+        "vc-radio__hint",
+        "vc-radio__label"
+      ],
+      "category": "form",
+      "status": "core",
+      "description": "单选组",
+      "root": "vc-radio",
+      "parts": [
+        "box",
+        "hint",
+        "label"
+      ],
+      "variants": [
+        "col"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "radio"
+      }
+    },
+    "toolbar": {
+      "classes": [
+        "vc-search",
+        "vc-search--pair",
+        "vc-search__item",
+        "vc-search__ops",
+        "vc-toolbar",
+        "vc-toolbar__ops",
+        "vc-toolbar__title"
+      ],
+      "category": "pattern",
+      "status": "core",
+      "description": "查询工具栏",
+      "root": "vc-toolbar",
+      "parts": [
+        "item",
+        "ops",
+        "title"
+      ],
+      "variants": [
+        "pair"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "toolbar"
+      }
+    },
+    "select": {
+      "classes": [
+        "vc-select"
+      ],
+      "category": "form",
+      "status": "core",
+      "description": "选择器",
+      "root": "vc-select",
+      "parts": [],
+      "variants": [],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "select"
+      }
+    },
+    "loading": {
+      "classes": [
+        "vc-skeleton",
+        "vc-skeleton__line",
+        "vc-skeleton__line--w60",
+        "vc-skeleton__line--w80",
+        "vc-spin"
+      ],
+      "category": "feedback",
+      "status": "core",
+      "description": "加载与骨架",
+      "root": "vc-skeleton",
+      "parts": [
+        "line",
+        "line--w60",
+        "line--w80"
+      ],
+      "variants": [
+        "w60",
+        "w80"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "loading"
+      }
+    },
+    "space": {
+      "classes": [
+        "vc-space",
+        "vc-space--between",
+        "vc-space--block",
+        "vc-space--loose",
+        "vc-space--tight"
+      ],
+      "category": "layout",
+      "status": "core",
+      "description": "横向间距",
+      "root": "vc-space",
+      "parts": [],
+      "variants": [
+        "between",
+        "block",
+        "loose",
+        "tight"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "space"
+      }
+    },
+    "states": {
+      "classes": [
+        "vc-state",
+        "vc-state--deny",
+        "vc-state--error",
+        "vc-state--loading",
+        "vc-state__hint",
+        "vc-state__title"
+      ],
+      "category": "feedback",
+      "status": "core",
+      "description": "五态区块",
+      "root": "vc-state",
+      "parts": [
+        "hint",
+        "title"
+      ],
+      "variants": [
+        "deny",
+        "error",
+        "loading"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "states"
+      }
+    },
+    "steps": {
+      "classes": [
+        "vc-steps",
+        "vc-steps__desc",
+        "vc-steps__name",
+        "vc-steps__no"
+      ],
+      "category": "layout",
+      "status": "core",
+      "description": "步骤条",
+      "root": "vc-steps",
+      "parts": [
+        "desc",
+        "name",
+        "no"
+      ],
+      "variants": [],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "steps"
+      }
+    },
+    "switch": {
+      "classes": [
+        "vc-switch"
+      ],
+      "category": "form",
+      "status": "core",
+      "description": "开关",
+      "root": "vc-switch",
+      "parts": [],
+      "variants": [],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "switch"
+      }
+    },
+    "tabs": {
+      "classes": [
+        "vc-tabpanel",
+        "vc-tabs",
+        "vc-tabs--industry",
+        "vc-tabs__extra",
+        "vc-tabs__item",
+        "vc-tabs__item--active"
+      ],
+      "category": "layout",
+      "status": "core",
+      "description": "页签",
+      "root": "vc-tabs",
+      "parts": [
+        "extra",
+        "item",
+        "item--active"
+      ],
+      "variants": [
+        "active",
+        "industry"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "tabs"
+      }
+    },
+    "tag": {
+      "classes": [
+        "vc-tag",
+        "vc-tag--err",
+        "vc-tag--info",
+        "vc-tag--muted",
+        "vc-tag--ok",
+        "vc-tag--run",
+        "vc-tag--warn"
+      ],
+      "category": "data",
+      "status": "core",
+      "description": "标签",
+      "root": "vc-tag",
+      "parts": [],
+      "variants": [
+        "err",
+        "info",
+        "muted",
+        "ok",
+        "run",
+        "warn"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "tag"
+      }
+    },
+    "textarea": {
+      "classes": [
+        "vc-textarea"
+      ],
+      "category": "form",
+      "status": "core",
+      "description": "多行文本",
+      "root": "vc-textarea",
+      "parts": [],
+      "variants": [],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "textarea"
+      }
+    },
+    "timeline": {
+      "classes": [
+        "vc-timeline",
+        "vc-timeline__desc",
+        "vc-timeline__dot",
+        "vc-timeline__item",
+        "vc-timeline__item--err",
+        "vc-timeline__item--ok",
+        "vc-timeline__item--run",
+        "vc-timeline__item--warn",
+        "vc-timeline__time",
+        "vc-timeline__title"
+      ],
+      "category": "data",
+      "status": "core",
+      "description": "时间线",
+      "root": "vc-timeline",
+      "parts": [
+        "desc",
+        "dot",
+        "item",
+        "item--err",
+        "item--ok",
+        "item--run",
+        "item--warn",
+        "time",
+        "title"
+      ],
+      "variants": [
+        "err",
+        "ok",
+        "run",
+        "warn"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "timeline"
+      }
+    },
+    "tooltip": {
+      "classes": [
+        "vc-tooltip",
+        "vc-tooltip__body",
+        "vc-tooltip__body--bottom",
+        "vc-tooltip__body--left",
+        "vc-tooltip__body--right"
+      ],
+      "category": "feedback",
+      "status": "core",
+      "description": "悬浮提示",
+      "root": "vc-tooltip",
+      "parts": [
+        "body",
+        "body--bottom",
+        "body--left",
+        "body--right"
+      ],
+      "variants": [
+        "bottom",
+        "left",
+        "right"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "tooltip"
+      }
+    },
+    "tree": {
+      "classes": [
+        "vc-tree",
+        "vc-tree--check",
+        "vc-tree-panel",
+        "vc-tree__children",
+        "vc-tree__count",
+        "vc-tree__label",
+        "vc-tree__node",
+        "vc-tree__row",
+        "vc-tree__toggle",
+        "vc-tree__toggle--leaf"
+      ],
+      "category": "layout",
+      "status": "core",
+      "description": "树与左树面板",
+      "root": "vc-tree",
+      "parts": [
+        "children",
+        "count",
+        "label",
+        "node",
+        "row",
+        "toggle",
+        "toggle--leaf"
+      ],
+      "variants": [
+        "check",
+        "leaf"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "tree"
+      }
+    },
+    "upload": {
+      "classes": [
+        "vc-upload",
+        "vc-upload__bar",
+        "vc-upload__drop",
+        "vc-upload__hint",
+        "vc-upload__item",
+        "vc-upload__item--err",
+        "vc-upload__item--ok",
+        "vc-upload__list",
+        "vc-upload__name",
+        "vc-upload__size",
+        "vc-upload__state",
+        "vc-upload__state--err",
+        "vc-upload__state--ok",
+        "vc-upload__summary",
+        "vc-upload__x"
+      ],
+      "category": "form",
+      "status": "core",
+      "description": "文件上传",
+      "root": "vc-upload",
+      "parts": [
+        "bar",
+        "drop",
+        "hint",
+        "item",
+        "item--err",
+        "item--ok",
+        "list",
+        "name",
+        "size",
+        "state",
+        "state--err",
+        "state--ok",
+        "summary",
+        "x"
+      ],
+      "variants": [
+        "err",
+        "ok"
+      ],
+      "states": [
+        "is-hidden",
+        "is-active",
+        "is-current",
+        "is-open"
+      ],
+      "requires": {
+        "data-component": "upload"
+      }
+    }
+  },
+  "classes": {
+    "vc-actionbar": "actionbar",
+    "vc-actionbar--static": "actionbar",
+    "vc-actionbar__hint": "actionbar",
+    "vc-actionbar__ops": "actionbar",
+    "vc-agentbar": "chat",
+    "vc-agentbar__ctx": "chat",
+    "vc-agentbar__mark": "chat",
+    "vc-agentbar__name": "chat",
+    "vc-agentbar__sub": "chat",
+    "vc-alert": "alert",
+    "vc-alert--err": "alert",
+    "vc-alert--ok": "alert",
+    "vc-alert--warn": "alert",
+    "vc-ask": "chat",
+    "vc-ask__opt": "chat",
+    "vc-back": "pagehead",
+    "vc-badge": "badge",
+    "vc-bind": "chat",
+    "vc-bind__field": "chat",
+    "vc-bind__state": "chat",
+    "vc-btn": "btn",
+    "vc-btn--block": "btn",
+    "vc-btn--brand": "btn",
+    "vc-btn--danger": "btn",
+    "vc-btn--lg": "btn",
+    "vc-btn--primary": "btn",
+    "vc-btn--sm": "btn",
+    "vc-btn--text": "btn",
+    "vc-canvas": "layout",
+    "vc-canvas--actionbar": "layout",
+    "vc-card": "card",
+    "vc-card--plan": "card",
+    "vc-card__desc": "card",
+    "vc-card__foot": "card",
+    "vc-card__head": "card",
+    "vc-chamfer": "base",
+    "vc-chart": "chart",
+    "vc-chart__cap": "chart",
+    "vc-chat": "chat",
+    "vc-chat__ava": "chat",
+    "vc-chat__bubble": "chat",
+    "vc-chat__dots": "chat",
+    "vc-chat__main": "chat",
+    "vc-chat__meta": "chat",
+    "vc-chat__note": "chat",
+    "vc-chat__row": "chat",
+    "vc-chat__row--me": "chat",
+    "vc-check": "check",
+    "vc-check--conflict": "check",
+    "vc-check-group": "check",
+    "vc-check-group--col": "check",
+    "vc-check__box": "check",
+    "vc-check__label": "check",
+    "vc-check__note": "check",
+    "vc-chip": "chat",
+    "vc-chip--bad": "chat",
+    "vc-chip--ref": "chat",
+    "vc-chip__ico": "chat",
+    "vc-chip__name": "chat",
+    "vc-chip__size": "chat",
+    "vc-chip__thumb": "chat",
+    "vc-chip__x": "chat",
+    "vc-collapse": "collapse",
+    "vc-collapse__body": "collapse",
+    "vc-collapse__caret": "collapse",
+    "vc-collapse__count": "collapse",
+    "vc-collapse__head": "collapse",
+    "vc-collapse__item": "collapse",
+    "vc-collapse__title": "collapse",
+    "vc-composer": "chat",
+    "vc-composer__atts": "chat",
+    "vc-composer__bar": "chat",
+    "vc-composer__hint": "chat",
+    "vc-composer__meta": "chat",
+    "vc-composer__send": "chat",
+    "vc-composer__send--stop": "chat",
+    "vc-crumb": "shell",
+    "vc-crumb__sep": "shell",
+    "vc-cut__title": "cut",
+    "vc-datepicker": "datepicker",
+    "vc-datepicker--range": "datepicker",
+    "vc-datepicker__cal": "datepicker",
+    "vc-datepicker__cell": "datepicker",
+    "vc-datepicker__grid": "datepicker",
+    "vc-datepicker__head": "datepicker",
+    "vc-datepicker__nav": "datepicker",
+    "vc-datepicker__panel": "datepicker",
+    "vc-datepicker__quick": "datepicker",
+    "vc-datepicker__sep": "datepicker",
+    "vc-datepicker__trigger": "datepicker",
+    "vc-datepicker__wd": "datepicker",
+    "vc-desc": "detail",
+    "vc-desc--1": "detail",
+    "vc-desc--2": "detail",
+    "vc-desc__item": "detail",
+    "vc-desc__k": "detail",
+    "vc-desc__v": "detail",
+    "vc-detail-head": "detail",
+    "vc-detail-head__meta": "detail",
+    "vc-divider": "divider",
+    "vc-divider--dashed": "divider",
+    "vc-divider--label": "divider",
+    "vc-divider__label": "divider",
+    "vc-dot": "shell",
+    "vc-dot--teal": "shell",
+    "vc-dot--warn": "shell",
+    "vc-drawer": "overlay",
+    "vc-drawer--narrow": "overlay",
+    "vc-drawer__body": "overlay",
+    "vc-drawer__foot": "overlay",
+    "vc-drawer__head": "overlay",
+    "vc-drawer__mask": "overlay",
+    "vc-drop": "chat",
+    "vc-drop__box": "chat",
+    "vc-dropdown": "dropdown",
+    "vc-dropdown__caret": "dropdown",
+    "vc-dropdown__item": "dropdown",
+    "vc-dropdown__item--danger": "dropdown",
+    "vc-dropdown__menu": "dropdown",
+    "vc-dropdown__sep": "dropdown",
+    "vc-dropdown__text": "dropdown",
+    "vc-dropdown__trigger": "dropdown",
+    "vc-ellipsis": "utility",
+    "vc-field": "field",
+    "vc-field--invalid": "field",
+    "vc-field--span2": "field",
+    "vc-field__err": "field",
+    "vc-field__hint": "field",
+    "vc-field__label": "field",
+    "vc-field__req": "field",
+    "vc-file-input": "input",
+    "vc-form-actions": "form",
+    "vc-form-grid": "form",
+    "vc-form-page": "form",
+    "vc-gate": "gate",
+    "vc-gate--static": "gate",
+    "vc-gate__ack": "gate",
+    "vc-gate__facts": "gate",
+    "vc-gate__list": "gate",
+    "vc-gate__mask": "gate",
+    "vc-gate__ops": "gate",
+    "vc-gate__warn": "gate",
+    "vc-grid": "grid",
+    "vc-grid--3": "grid",
+    "vc-grid--4": "grid",
+    "vc-group-title": "form",
+    "vc-hex": "shell",
+    "vc-icon-btn": "chat",
+    "vc-icon-btn__count": "chat",
+    "vc-input": "input",
+    "vc-input-group": "input",
+    "vc-input-group__icon": "input",
+    "vc-kpi": "kpi",
+    "vc-kpi--amber": "kpi",
+    "vc-kpi--err": "kpi",
+    "vc-kpi-row": "kpi",
+    "vc-kpi-row--mini": "kpi",
+    "vc-kpi__delta": "kpi",
+    "vc-kpi__lbl": "kpi",
+    "vc-led": "shell",
+    "vc-led--amber": "shell",
+    "vc-led--cyan": "shell",
+    "vc-led--red": "shell",
+    "vc-line": "chat",
+    "vc-line__body": "chat",
+    "vc-line__card": "chat",
+    "vc-line__cover": "chat",
+    "vc-line__desc": "chat",
+    "vc-line__ghost": "chat",
+    "vc-line__led": "chat",
+    "vc-line__node": "chat",
+    "vc-line__st": "chat",
+    "vc-line__tag": "chat",
+    "vc-line__title": "chat",
+    "vc-modal": "overlay",
+    "vc-modal--narrow": "overlay",
+    "vc-modal__body": "overlay",
+    "vc-modal__foot": "overlay",
+    "vc-modal__head": "overlay",
+    "vc-modal__mask": "overlay",
+    "vc-mono": "utility",
+    "vc-name": "table",
+    "vc-nav": "shell",
+    "vc-nav__count": "shell",
+    "vc-nav__icon": "shell",
+    "vc-nav__item": "shell",
+    "vc-nav__label": "shell",
+    "vc-nav__sub": "shell",
+    "vc-nav__text": "shell",
+    "vc-note": "alert",
+    "vc-num-tab": "utility",
+    "vc-ops": "table",
+    "vc-opt": "chat",
+    "vc-opt__d": "chat",
+    "vc-opt__go": "chat",
+    "vc-opt__ico": "chat",
+    "vc-opt__t": "chat",
+    "vc-page": "base",
+    "vc-pagehead": "pagehead",
+    "vc-pagehead--bar": "pagehead",
+    "vc-pagehead__desc": "pagehead",
+    "vc-pagehead__ops": "pagehead",
+    "vc-pager": "pager",
+    "vc-pager__btn": "pager",
+    "vc-pager__right": "pager",
+    "vc-pager__size": "pager",
+    "vc-pager__total": "pager",
+    "vc-parse": "chat",
+    "vc-parse--fail": "chat",
+    "vc-parse--wait": "chat",
+    "vc-parse__ent": "chat",
+    "vc-parse__head": "chat",
+    "vc-parse__meta": "chat",
+    "vc-parse__name": "chat",
+    "vc-parse__ops": "chat",
+    "vc-parse__type": "chat",
+    "vc-progress": "progress",
+    "vc-progress__bar": "progress",
+    "vc-radio": "radio",
+    "vc-radio-group": "radio",
+    "vc-radio-group--col": "radio",
+    "vc-radio__box": "radio",
+    "vc-radio__hint": "radio",
+    "vc-radio__label": "radio",
+    "vc-rail": "layout",
+    "vc-rail--loose": "layout",
+    "vc-rail--static": "layout",
+    "vc-rail__head": "layout",
+    "vc-scroller": "chat",
+    "vc-scroller__item": "chat",
+    "vc-search": "toolbar",
+    "vc-search--pair": "toolbar",
+    "vc-search__item": "toolbar",
+    "vc-search__ops": "toolbar",
+    "vc-section": "layout",
+    "vc-section--tight": "table",
+    "vc-select": "select",
+    "vc-skeleton": "loading",
+    "vc-skeleton__line": "loading",
+    "vc-skeleton__line--w60": "loading",
+    "vc-skeleton__line--w80": "loading",
+    "vc-space": "space",
+    "vc-space--between": "space",
+    "vc-space--block": "space",
+    "vc-space--loose": "space",
+    "vc-space--tight": "space",
+    "vc-spin": "loading",
+    "vc-split": "layout",
+    "vc-split--aside": "layout",
+    "vc-split__main": "layout",
+    "vc-split__side": "layout",
+    "vc-split__side--loose": "layout",
+    "vc-split__side--sticky": "layout",
+    "vc-stack": "layout",
+    "vc-stat": "kpi",
+    "vc-stat__delta": "kpi",
+    "vc-stat__label": "kpi",
+    "vc-stat__value": "kpi",
+    "vc-state": "states",
+    "vc-state--deny": "states",
+    "vc-state--error": "states",
+    "vc-state--loading": "states",
+    "vc-state__hint": "states",
+    "vc-state__title": "states",
+    "vc-steps": "steps",
+    "vc-steps__desc": "steps",
+    "vc-steps__name": "steps",
+    "vc-steps__no": "steps",
+    "vc-switch": "switch",
+    "vc-table": "table",
+    "vc-table--compact": "table",
+    "vc-table--freeze": "table",
+    "vc-table--num": "table",
+    "vc-table__empty": "table",
+    "vc-table__num": "table",
+    "vc-table__ops": "table",
+    "vc-table__state": "table",
+    "vc-table__wrap": "table",
+    "vc-tabpanel": "tabs",
+    "vc-tabs": "tabs",
+    "vc-tabs__extra": "tabs",
+    "vc-tabs__item": "tabs",
+    "vc-tabs__item--active": "tabs",
+    "vc-tag": "tag",
+    "vc-tag--err": "tag",
+    "vc-tag--info": "tag",
+    "vc-tag--muted": "tag",
+    "vc-tag--ok": "tag",
+    "vc-tag--run": "tag",
+    "vc-tag--warn": "tag",
+    "vc-textarea": "textarea",
+    "vc-timeline": "timeline",
+    "vc-timeline__desc": "timeline",
+    "vc-timeline__dot": "timeline",
+    "vc-timeline__item": "timeline",
+    "vc-timeline__item--err": "timeline",
+    "vc-timeline__item--ok": "timeline",
+    "vc-timeline__item--run": "timeline",
+    "vc-timeline__item--warn": "timeline",
+    "vc-timeline__time": "timeline",
+    "vc-timeline__title": "timeline",
+    "vc-toolbar": "toolbar",
+    "vc-toolbar__ops": "toolbar",
+    "vc-toolbar__title": "toolbar",
+    "vc-tooltip": "tooltip",
+    "vc-tooltip__body": "tooltip",
+    "vc-tooltip__body--bottom": "tooltip",
+    "vc-tooltip__body--left": "tooltip",
+    "vc-tooltip__body--right": "tooltip",
+    "vc-topbar": "shell",
+    "vc-topbar__mark": "shell",
+    "vc-topbar__right": "shell",
+    "vc-tree": "tree",
+    "vc-tree--check": "tree",
+    "vc-tree-panel": "tree",
+    "vc-tree__children": "tree",
+    "vc-tree__count": "tree",
+    "vc-tree__label": "tree",
+    "vc-tree__node": "tree",
+    "vc-tree__row": "tree",
+    "vc-tree__toggle": "tree",
+    "vc-tree__toggle--leaf": "tree",
+    "vc-upload": "upload",
+    "vc-upload__bar": "upload",
+    "vc-upload__drop": "upload",
+    "vc-upload__hint": "upload",
+    "vc-upload__item": "upload",
+    "vc-upload__item--err": "upload",
+    "vc-upload__item--ok": "upload",
+    "vc-upload__list": "upload",
+    "vc-upload__name": "upload",
+    "vc-upload__size": "upload",
+    "vc-upload__state": "upload",
+    "vc-upload__state--err": "upload",
+    "vc-upload__state--ok": "upload",
+    "vc-upload__summary": "upload",
+    "vc-upload__x": "upload",
+    "vc-user__ava": "shell",
+    "vc-work": "chat",
+    "vc-table__center": "table",
+    "vc-card--app": "card",
+    "vc-card__mark": "card",
+    "vc-card__ops": "card",
+    "vc-tabs--industry": "tabs"
+  },
+  "categoryOf": {
+    "vc-actionbar": "pattern",
+    "vc-actionbar--static": "pattern",
+    "vc-actionbar__hint": "pattern",
+    "vc-actionbar__ops": "pattern",
+    "vc-agentbar": "chat",
+    "vc-agentbar__ctx": "chat",
+    "vc-agentbar__mark": "chat",
+    "vc-agentbar__name": "chat",
+    "vc-agentbar__sub": "chat",
+    "vc-alert": "feedback",
+    "vc-alert--err": "feedback",
+    "vc-alert--ok": "feedback",
+    "vc-alert--warn": "feedback",
+    "vc-ask": "chat",
+    "vc-ask__opt": "chat",
+    "vc-back": "pattern",
+    "vc-badge": "data",
+    "vc-bind": "chat",
+    "vc-bind__field": "chat",
+    "vc-bind__state": "chat",
+    "vc-btn": "action",
+    "vc-btn--block": "action",
+    "vc-btn--brand": "action",
+    "vc-btn--danger": "action",
+    "vc-btn--lg": "action",
+    "vc-btn--primary": "action",
+    "vc-btn--sm": "action",
+    "vc-btn--text": "action",
+    "vc-canvas": "layout",
+    "vc-canvas--actionbar": "layout",
+    "vc-card": "data",
+    "vc-card__desc": "data",
+    "vc-card__foot": "data",
+    "vc-card__head": "data",
+    "vc-chamfer": "layout",
+    "vc-chart": "data",
+    "vc-chart__cap": "data",
+    "vc-chat": "chat",
+    "vc-chat__ava": "chat",
+    "vc-chat__bubble": "chat",
+    "vc-chat__dots": "chat",
+    "vc-chat__main": "chat",
+    "vc-chat__meta": "chat",
+    "vc-chat__note": "chat",
+    "vc-chat__row": "chat",
+    "vc-chat__row--me": "chat",
+    "vc-check": "form",
+    "vc-check--conflict": "form",
+    "vc-check-group": "form",
+    "vc-check-group--col": "form",
+    "vc-check__box": "form",
+    "vc-check__label": "form",
+    "vc-check__note": "form",
+    "vc-chip": "chat",
+    "vc-chip--bad": "chat",
+    "vc-chip--ref": "chat",
+    "vc-chip__ico": "chat",
+    "vc-chip__name": "chat",
+    "vc-chip__size": "chat",
+    "vc-chip__thumb": "chat",
+    "vc-chip__x": "chat",
+    "vc-collapse": "form",
+    "vc-collapse__body": "form",
+    "vc-collapse__caret": "form",
+    "vc-collapse__count": "form",
+    "vc-collapse__head": "form",
+    "vc-collapse__item": "form",
+    "vc-collapse__title": "form",
+    "vc-composer": "chat",
+    "vc-composer__atts": "chat",
+    "vc-composer__bar": "chat",
+    "vc-composer__hint": "chat",
+    "vc-composer__meta": "chat",
+    "vc-composer__send": "chat",
+    "vc-composer__send--stop": "chat",
+    "vc-crumb": "shell",
+    "vc-crumb__sep": "shell",
+    "vc-cut__title": "layout",
+    "vc-datepicker": "form",
+    "vc-datepicker--range": "form",
+    "vc-datepicker__cal": "form",
+    "vc-datepicker__cell": "form",
+    "vc-datepicker__grid": "form",
+    "vc-datepicker__head": "form",
+    "vc-datepicker__nav": "form",
+    "vc-datepicker__panel": "form",
+    "vc-datepicker__quick": "form",
+    "vc-datepicker__sep": "form",
+    "vc-datepicker__trigger": "form",
+    "vc-datepicker__wd": "form",
+    "vc-desc": "pattern",
+    "vc-desc--1": "pattern",
+    "vc-desc--2": "pattern",
+    "vc-desc__item": "pattern",
+    "vc-desc__k": "pattern",
+    "vc-desc__v": "pattern",
+    "vc-detail-head": "pattern",
+    "vc-detail-head__meta": "pattern",
+    "vc-divider": "layout",
+    "vc-divider--dashed": "layout",
+    "vc-divider--label": "layout",
+    "vc-divider__label": "layout",
+    "vc-dot": "shell",
+    "vc-dot--teal": "shell",
+    "vc-dot--warn": "shell",
+    "vc-drawer": "feedback",
+    "vc-drawer--narrow": "feedback",
+    "vc-drawer__body": "feedback",
+    "vc-drawer__foot": "feedback",
+    "vc-drawer__head": "feedback",
+    "vc-drawer__mask": "feedback",
+    "vc-drop": "chat",
+    "vc-drop__box": "chat",
+    "vc-dropdown": "action",
+    "vc-dropdown__caret": "action",
+    "vc-dropdown__item": "action",
+    "vc-dropdown__item--danger": "action",
+    "vc-dropdown__menu": "action",
+    "vc-dropdown__sep": "action",
+    "vc-dropdown__text": "action",
+    "vc-dropdown__trigger": "action",
+    "vc-ellipsis": "text",
+    "vc-field": "form",
+    "vc-field--invalid": "form",
+    "vc-field--span2": "form",
+    "vc-field__err": "form",
+    "vc-field__hint": "form",
+    "vc-field__label": "form",
+    "vc-field__req": "form",
+    "vc-file-input": "form",
+    "vc-form-actions": "pattern",
+    "vc-form-grid": "form",
+    "vc-form-page": "pattern",
+    "vc-gate": "feedback",
+    "vc-gate--static": "feedback",
+    "vc-gate__ack": "feedback",
+    "vc-gate__facts": "feedback",
+    "vc-gate__list": "feedback",
+    "vc-gate__mask": "feedback",
+    "vc-gate__ops": "feedback",
+    "vc-gate__warn": "feedback",
+    "vc-grid": "layout",
+    "vc-grid--3": "layout",
+    "vc-grid--4": "layout",
+    "vc-group-title": "pattern",
+    "vc-hex": "shell",
+    "vc-icon-btn": "chat",
+    "vc-icon-btn__count": "chat",
+    "vc-input": "form",
+    "vc-input-group": "form",
+    "vc-input-group__icon": "form",
+    "vc-kpi": "data",
+    "vc-kpi--amber": "data",
+    "vc-kpi--err": "data",
+    "vc-kpi-row": "data",
+    "vc-kpi-row--mini": "data",
+    "vc-kpi__delta": "data",
+    "vc-kpi__lbl": "data",
+    "vc-led": "shell",
+    "vc-led--amber": "shell",
+    "vc-led--cyan": "shell",
+    "vc-led--red": "shell",
+    "vc-line": "chat",
+    "vc-line__body": "chat",
+    "vc-line__card": "chat",
+    "vc-line__cover": "chat",
+    "vc-line__desc": "chat",
+    "vc-line__ghost": "chat",
+    "vc-line__led": "chat",
+    "vc-line__node": "chat",
+    "vc-line__st": "chat",
+    "vc-line__tag": "chat",
+    "vc-line__title": "chat",
+    "vc-modal": "feedback",
+    "vc-modal--narrow": "feedback",
+    "vc-modal__body": "feedback",
+    "vc-modal__foot": "feedback",
+    "vc-modal__head": "feedback",
+    "vc-modal__mask": "feedback",
+    "vc-mono": "text",
+    "vc-name": "pattern",
+    "vc-nav": "shell",
+    "vc-nav__count": "shell",
+    "vc-nav__icon": "shell",
+    "vc-nav__item": "shell",
+    "vc-nav__label": "shell",
+    "vc-nav__sub": "shell",
+    "vc-nav__text": "shell",
+    "vc-note": "feedback",
+    "vc-num-tab": "text",
+    "vc-ops": "pattern",
+    "vc-opt": "chat",
+    "vc-opt__d": "chat",
+    "vc-opt__go": "chat",
+    "vc-opt__ico": "chat",
+    "vc-opt__t": "chat",
+    "vc-page": "layout",
+    "vc-pagehead": "pattern",
+    "vc-pagehead--bar": "pattern",
+    "vc-pagehead__desc": "pattern",
+    "vc-pagehead__ops": "pattern",
+    "vc-pager": "data",
+    "vc-pager__btn": "data",
+    "vc-pager__right": "data",
+    "vc-pager__size": "data",
+    "vc-pager__total": "data",
+    "vc-parse": "chat",
+    "vc-parse--fail": "chat",
+    "vc-parse--wait": "chat",
+    "vc-parse__ent": "chat",
+    "vc-parse__head": "chat",
+    "vc-parse__meta": "chat",
+    "vc-parse__name": "chat",
+    "vc-parse__ops": "chat",
+    "vc-parse__type": "chat",
+    "vc-progress": "feedback",
+    "vc-progress__bar": "feedback",
+    "vc-radio": "form",
+    "vc-radio-group": "form",
+    "vc-radio-group--col": "form",
+    "vc-radio__box": "form",
+    "vc-radio__hint": "form",
+    "vc-radio__label": "form",
+    "vc-rail": "layout",
+    "vc-rail--loose": "layout",
+    "vc-rail--static": "layout",
+    "vc-rail__head": "layout",
+    "vc-scroller": "chat",
+    "vc-scroller__item": "chat",
+    "vc-search": "pattern",
+    "vc-search--pair": "pattern",
+    "vc-search__item": "pattern",
+    "vc-search__ops": "pattern",
+    "vc-section": "layout",
+    "vc-section--tight": "pattern",
+    "vc-select": "form",
+    "vc-skeleton": "feedback",
+    "vc-skeleton__line": "feedback",
+    "vc-skeleton__line--w60": "feedback",
+    "vc-skeleton__line--w80": "feedback",
+    "vc-space": "layout",
+    "vc-space--between": "layout",
+    "vc-space--block": "layout",
+    "vc-space--loose": "layout",
+    "vc-space--tight": "layout",
+    "vc-spin": "feedback",
+    "vc-split": "layout",
+    "vc-split--aside": "layout",
+    "vc-split__main": "layout",
+    "vc-split__side": "layout",
+    "vc-split__side--loose": "layout",
+    "vc-split__side--sticky": "layout",
+    "vc-stack": "layout",
+    "vc-stat": "data",
+    "vc-stat__delta": "data",
+    "vc-stat__label": "data",
+    "vc-stat__value": "data",
+    "vc-state": "feedback",
+    "vc-state--deny": "feedback",
+    "vc-state--error": "feedback",
+    "vc-state--loading": "feedback",
+    "vc-state__hint": "feedback",
+    "vc-state__title": "feedback",
+    "vc-steps": "layout",
+    "vc-steps__desc": "layout",
+    "vc-steps__name": "layout",
+    "vc-steps__no": "layout",
+    "vc-switch": "form",
+    "vc-table": "data",
+    "vc-table--compact": "pattern",
+    "vc-table--freeze": "data",
+    "vc-table--num": "data",
+    "vc-table__empty": "data",
+    "vc-table__num": "data",
+    "vc-table__ops": "data",
+    "vc-table__state": "data",
+    "vc-table__wrap": "data",
+    "vc-tabpanel": "layout",
+    "vc-tabs": "layout",
+    "vc-tabs__extra": "layout",
+    "vc-tabs__item": "layout",
+    "vc-tabs__item--active": "layout",
+    "vc-tag": "data",
+    "vc-tag--err": "data",
+    "vc-tag--info": "data",
+    "vc-tag--muted": "data",
+    "vc-tag--ok": "data",
+    "vc-tag--run": "data",
+    "vc-tag--warn": "data",
+    "vc-textarea": "form",
+    "vc-timeline": "data",
+    "vc-timeline__desc": "data",
+    "vc-timeline__dot": "data",
+    "vc-timeline__item": "data",
+    "vc-timeline__item--err": "data",
+    "vc-timeline__item--ok": "data",
+    "vc-timeline__item--run": "data",
+    "vc-timeline__item--warn": "data",
+    "vc-timeline__time": "data",
+    "vc-timeline__title": "data",
+    "vc-toolbar": "pattern",
+    "vc-toolbar__ops": "pattern",
+    "vc-toolbar__title": "pattern",
+    "vc-tooltip": "feedback",
+    "vc-tooltip__body": "feedback",
+    "vc-tooltip__body--bottom": "feedback",
+    "vc-tooltip__body--left": "feedback",
+    "vc-tooltip__body--right": "feedback",
+    "vc-topbar": "shell",
+    "vc-topbar__mark": "shell",
+    "vc-topbar__right": "shell",
+    "vc-tree": "layout",
+    "vc-tree--check": "layout",
+    "vc-tree-panel": "layout",
+    "vc-tree__children": "layout",
+    "vc-tree__count": "layout",
+    "vc-tree__label": "layout",
+    "vc-tree__node": "layout",
+    "vc-tree__row": "layout",
+    "vc-tree__toggle": "layout",
+    "vc-tree__toggle--leaf": "layout",
+    "vc-upload": "form",
+    "vc-upload__bar": "form",
+    "vc-upload__drop": "form",
+    "vc-upload__hint": "form",
+    "vc-upload__item": "form",
+    "vc-upload__item--err": "form",
+    "vc-upload__item--ok": "form",
+    "vc-upload__list": "form",
+    "vc-upload__name": "form",
+    "vc-upload__size": "form",
+    "vc-upload__state": "form",
+    "vc-upload__state--err": "form",
+    "vc-upload__state--ok": "form",
+    "vc-upload__summary": "form",
+    "vc-upload__x": "form",
+    "vc-user__ava": "shell",
+    "vc-work": "chat",
+    "vc-table__center": "data",
+    "vc-card--app": "data",
+    "vc-card__mark": "data",
+    "vc-card__ops": "data",
+    "vc-tabs--industry": "layout"
+  },
+  "unowned": [],
+  "utilities": [
+    "is-hidden",
+    "is-active",
+    "is-current",
+    "is-open",
+    "vc-mono",
+    "vc-num-tab",
+    "vc-ellipsis"
+  ],
+  "deprecated": [
+    "vc-cut__title",
+    "vc-user__ava"
+  ]
+}

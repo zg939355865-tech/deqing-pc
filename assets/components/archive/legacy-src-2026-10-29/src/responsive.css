@@ -1,0 +1,66 @@
+/* ══ 响应式与打印：必须最后加载，覆盖前面各层的尺寸与显隐 ══ */
+/* ── 打印 ─────────────────────────────────────────────── */
+@media print {
+  .vc-gate__mask, .vc-gate__ops, .vc-modal__mask, .vc-drawer__mask, .vc-modal, .vc-drawer,
+  .vc-pager__right, .vc-toolbar__ops, .vc-search__ops, .vc-dropdown__menu,
+  .vc-drop, .vc-composer__send, .vc-icon-btn, .vc-chat__dots, .vc-chip__x { display: none; }
+  .vc-section, .vc-card, .vc-stat, .vc-chart, .vc-kpi { box-shadow: none; }
+  .vc-table tbody tr:nth-child(even) { background: #fff; }
+  .vc-table__wrap { overflow: visible; }
+  .vc-table--freeze th:first-child, .vc-table--freeze td:first-child { position: static; }
+  .vc-table td.vc-table__ops, .vc-table th.vc-table__ops { position: static; box-shadow: none; }
+  .vc-desc__k { background: #fff; }
+  /* 新组件：浮层与面板打印无意义则隐藏；折叠与树打印时全展开留档 */
+  .vc-tooltip__body, .vc-datepicker__panel, .vc-datepicker__quick, .vc-upload__x{ display: none; }
+  .vc-actionbar, .vc-back { display: none; }
+  .vc-canvas--actionbar { padding-bottom: var(--sp-5); }
+  .vc-split, .vc-split--aside { grid-template-columns: minmax(0, 1fr); }
+  .vc-tree-panel { position: static; max-height: none; }
+  /* 表格数据不换行是标准：打印与窄屏一律单行，超宽交给 .vc-table__wrap 横向滚动 */
+  .vc-collapse__body, .vc-tree__children { display: block !important; }
+  .vc-upload__drop { border-style: solid; }
+}
+
+/* ── 窄屏降级为文字版（单列，不横向溢出） ─────────────── */
+@media (max-width: 1100px) {
+  .vc-split, .vc-split--aside { grid-template-columns: minmax(0, 1fr); }
+  .vc-split__side--sticky, .vc-tree-panel { position: static; max-height: none; }
+  .vc-kpi-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .vc-actionbar__hint { display: none; }
+}
+@media (max-width: 900px) {
+  .vc-canvas { padding: var(--sp-3); }
+  .vc-pagehead--bar { padding: var(--sp-3) var(--sp-4); }
+  .vc-search, .vc-form-grid, .vc-desc, .vc-desc--2 { grid-template-columns: minmax(0, 1fr); }
+  .vc-search[data-fields] .vc-search__ops { grid-column: 1 / -1; align-self: stretch; }
+  .vc-work{ grid-template-columns: minmax(0, 1fr); }
+  .vc-rail { position: static; }
+  .vc-chat__row, .vc-chat__row--me { max-width: none; }
+  .vc-pagehead { flex-direction: column; align-items: flex-start; }
+  .vc-ellipsis { max-width: none; }
+  .vc-check-group, .vc-radio-group { flex-direction: column; gap: var(--sp-2); }
+  .vc-datepicker__panel { flex-direction: column; }
+  .vc-datepicker__quick { flex-direction: row; flex-wrap: wrap; border-right: 0; border-bottom: 1px solid var(--panel-line); padding: 0 0 var(--sp-2); }
+  .vc-upload__item { grid-template-columns: auto minmax(0,1fr) auto; }
+  .vc-upload__size { grid-column: 2 / 3; }
+  .vc-tree .vc-tree { padding-left: var(--sp-3); }
+  /* 产线工位卡：窄屏断管道改 3×2／2×N 网格，只留节点编号 */
+  .vc-line { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: var(--sp-5); }
+  .vc-line__st { --drop: 0px; }
+  .vc-line__st::before, .vc-line__st::after { display: none; }
+  .vc-line__node { margin-bottom: var(--sp-2); }
+  .vc-line__card { margin-top: 0; }
+}
+@media (max-width: 600px) {
+  .vc-line { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .vc-kpi-row, .vc-kpi-row--mini { grid-template-columns: minmax(0, 1fr); }}
+
+/* 栅格降列：4/3 列 → 2 列 → 1 列 */
+@media (max-width: 1100px) {
+  .vc-grid--3, .vc-grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .vc-grid, .vc-grid--3, .vc-grid--4 { grid-template-columns: minmax(0, 1fr); }
+}

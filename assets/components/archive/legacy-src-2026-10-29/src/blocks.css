@@ -1,0 +1,131 @@
+/* ══ L2 区块：页面头、工具栏、KPI 行、列表、表单、状态、确认门、操作条 ══ */
+/* ── 页面头与工具栏 ───────────────────────────────────── */
+.vc-pagehead { display: flex; align-items: flex-end; justify-content: space-between;
+  gap: var(--sp-4); margin-bottom: var(--sp-5); flex-wrap: wrap; }
+.vc-pagehead h1 { margin: 0; font-size: var(--fs-h1); font-weight: 700; letter-spacing: .03em; color: var(--navy-title); }
+.vc-pagehead__desc { margin: var(--sp-2) 0 0; color: var(--gray); font-size: var(--fs-sm); max-width: 620px; }
+.vc-pagehead__ops { display: flex; gap: var(--sp-2); flex-shrink: 0; }
+.vc-toolbar { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3);
+  padding: var(--sp-3) 0; border-bottom: 1px solid var(--line); margin-bottom: var(--sp-3); }
+.vc-toolbar__title { margin: 0; font-size: var(--fs-h3); color: var(--navy-title); font-weight: 700; }
+.vc-toolbar__ops { display: flex; gap: var(--sp-2); align-items: center; }
+
+/* ── 页面骨架与区块（令牌 → 组件 → 区块 → 整页骨架 的第三层） ──
+   页面只组合以下区块；宽度、栅格、间距用变量覆盖，不复制第二份样式。
+   ─────────────────────────────────────────────────────── */
+
+/* 画布：内容区最大宽度与留白（--canvas-max 覆盖页面宽度） */
+.vc-canvas { width: 100%; max-width: var(--canvas-max, 1440px); margin: 0 auto; padding: var(--sp-5); }
+.vc-canvas--actionbar { padding-bottom: calc(var(--sp-5) + 64px); }   /* 为固定操作条留白 */
+
+/* 顶部标题栏（整页骨架用；横贯内容区，贴顶） */
+.vc-pagehead--bar { background: var(--panel-bg); border-bottom: 1px solid var(--line);
+  padding: var(--sp-4) var(--sp-5); margin: 0 0 var(--sp-5); }
+
+/* 纵向堆叠与 KPI 行 */
+.vc-stack { display: flex; flex-direction: column; gap: var(--sp-4); }
+.vc-kpi-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--sp-4); margin-bottom: var(--sp-4); }
+.vc-kpi-row--mini { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-2); margin-bottom: 0; }
+.vc-kpi-row--mini .vc-kpi { padding: var(--sp-3); }
+.vc-kpi-row--mini .vc-kpi b { font-size: 20px; }
+
+/* 双栏骨架：默认右栏，--aside 为左树；宽度用变量覆盖 */
+.vc-split { display: grid; grid-template-columns: minmax(0, 1fr) var(--split-side, 340px);
+  gap: var(--sp-4); align-items: start; }
+.vc-split--aside { grid-template-columns: var(--split-aside, 248px) minmax(0, 1fr); }
+.vc-split__main { display: flex; flex-direction: column; gap: var(--sp-4); min-width: 0; }
+.vc-split__side { display: flex; flex-direction: column; gap: var(--sp-3); min-width: 0; }
+.vc-split__side--loose { gap: var(--sp-4); }
+.vc-split__side--sticky { position: sticky; top: var(--sp-4); align-self: start; }
+
+/* 左树面板（企业 → 工厂 → 工艺单元 → 实例） */
+.vc-tree-panel { padding: var(--sp-4) var(--sp-3); position: sticky; top: var(--sp-4);
+  align-self: start; max-height: calc(100vh - 160px); overflow: auto; }
+.vc-tree-panel h2 { margin: 0 0 var(--sp-3); font-size: var(--fs-h3); color: var(--navy-title); }
+.vc-tree-panel .vc-input { margin-bottom: var(--sp-2); }
+.vc-tree-panel .vc-nav { border-right: 0; background: transparent; padding: 0; }
+.vc-tree-panel .vc-nav__item { font-size: var(--fs-sm); padding-top: 8px; padding-bottom: 8px; }
+.vc-tree-panel .vc-nav__sub .vc-nav__item { padding-left: 26px; }
+
+/* 详情头：返回、标题与元信息 */
+.vc-back { margin-bottom: var(--sp-2); }
+.vc-detail-head h1 { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.vc-detail-head__meta { margin: var(--sp-2) 0 0; color: var(--gray); font-size: var(--fs-sm);
+  display: flex; gap: var(--sp-4); flex-wrap: wrap; }
+.vc-detail-head__meta b { color: var(--ink); font-family: var(--font-num); font-weight: 500; }
+
+/* 列表区块：紧凑内距、紧凑表格、行内操作与主名称链接 */
+.vc-section--tight { padding: var(--sp-4); }
+.vc-table--compact { min-width: var(--table-min, 0); }
+.vc-table--compact th, .vc-table--compact td { padding-left: 8px; padding-right: 8px; }
+.vc-table--compact td { white-space: nowrap; }
+.vc-ops { display: inline-flex; gap: 2px; align-items: center; }
+.vc-ops .vc-btn { padding: 4px 6px; }
+/* 行操作里的删除：红色文字按钮，不套整块按钮底色 */
+.vc-ops .vc-btn--text.vc-btn--danger { color: var(--err); background: transparent; border-color: transparent; }
+.vc-ops .vc-btn--text.vc-btn--danger:hover { color: var(--err); }
+.vc-name { display: inline-flex; align-items: center; gap: 6px; color: var(--teal); }
+
+/* 查询区：两字段语义类（pair）与 data-fields="2" 同一布局；保留给既有页面与演示 */
+.vc-search--pair .vc-search__ops { grid-column: 3 / -1; align-self: end; }
+
+/* 整页表单：满宽卡片、字段节奏与底部操作行 */
+.vc-form-page { width: 100%; max-width: none; padding: var(--sp-4); }
+.vc-form-page .vc-field { margin-bottom: var(--sp-3); }
+.vc-form-actions { display: flex; gap: var(--sp-2); justify-content: flex-end; margin-top: var(--sp-2); }
+
+/* 表单分组标题（整页表单与配置页共用） */
+.vc-group-title { display: flex; align-items: baseline; gap: var(--sp-2); }
+.vc-group-title h2, .vc-group-title h3, .vc-group-title h4 { margin: 0; font-size: var(--fs-h3); color: var(--navy-title); }
+.vc-group-title span { font-size: var(--fs-xs); color: var(--gray-l); }
+
+/* 门内影响清单与勾选确认 */
+.vc-gate__list { margin: 0 0 var(--sp-3); padding-left: 18px; font-size: var(--fs-sm); color: var(--ink); }
+.vc-gate__list li { margin: 3px 0; }
+.vc-gate__ack { display: flex; gap: 8px; align-items: flex-start; font-size: var(--fs-sm);
+  color: var(--ink); margin: var(--sp-2) 0; }
+.vc-gate__ack input { width: 16px; height: 16px; margin-top: 3px; flex: none; accent-color: var(--teal); }
+
+/* 固定底部操作条（配置页与整页表单共用） */
+.vc-actionbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-5); background: var(--panel-bg);
+  border-top: 1px solid var(--line); box-shadow: var(--sh-pop); }
+.vc-actionbar__hint { flex: 1 1 auto; min-width: 0; font-size: var(--fs-xs); color: var(--gray);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vc-actionbar__ops { display: flex; gap: var(--sp-2); flex: none; }
+.vc-actionbar__ops .vc-btn { white-space: nowrap; }
+.vc-actionbar--static { position: static; box-shadow: var(--sh-card); }
+
+/* 状态工具类：视图切换（页面只切类名或 hidden 属性，不写样式） */
+.is-hidden { display: none !important; }
+[hidden] { display: none !important; }
+
+/* ── 状态块（空／正常／异常／无权限／加载中） ─────────── */
+.vc-state { border: 1px dashed var(--line); padding: var(--sp-5); text-align: center;
+  background: var(--bg-soft); color: var(--gray); }
+.vc-state__title { display: block; color: var(--navy-title); font-weight: 700; margin-bottom: var(--sp-1); }
+.vc-state__hint { font-size: var(--fs-sm); }
+.vc-state--error { background: var(--err-bg); border-color: var(--err-line); color: var(--err); }
+.vc-state--error .vc-state__title { color: var(--err); }
+.vc-state--deny { background: var(--warn-bg); border-color: var(--warn-line); color: var(--warn); }
+.vc-state--deny .vc-state__title { color: var(--warn); }
+.vc-state--loading { background: var(--info-bg); border-color: var(--tag-line); color: var(--info); }
+.vc-state--loading .vc-state__title { color: var(--info); }
+
+/* ── 确认门（安全核心：确认与执行分离） ───────────────── */
+.vc-gate__mask { position: fixed; inset: 0; background: var(--mask); z-index: 20; }
+.vc-gate { position: fixed; left: 50%; top: 8vh; transform: translateX(-50%); z-index: 21;
+  width: min(560px, 92vw); max-height: 84vh; overflow: auto; background: var(--panel-bg);
+  border: 1px solid var(--line); padding: var(--sp-5); box-shadow: var(--sh-pop); }
+.vc-gate h3 { margin: 0 0 var(--sp-3); font-size: var(--fs-h3); color: var(--navy-title); }
+.vc-gate__facts { margin: 0 0 var(--sp-3); padding: 0; list-style: none; font-size: var(--fs-sm); }
+.vc-gate__facts li { display: flex; gap: var(--sp-3); padding: var(--sp-2) 0;
+  border-bottom: 1px solid var(--panel-line); }
+.vc-gate__facts b { flex: 0 0 96px; font-family: var(--font-num); font-size: var(--fs-xs);
+  color: var(--gray); letter-spacing: .06em; }
+.vc-gate__warn { background: var(--bg-callout); border-left: 3px solid var(--gold-web);
+  padding: var(--sp-2) var(--sp-3); font-size: var(--fs-sm); color: var(--ink); margin-bottom: var(--sp-4); }
+.vc-gate__ops { display: flex; gap: var(--sp-2); justify-content: flex-end; }
+.vc-gate--static { position: static; transform: none; width: min(620px, 100%); max-height: none; }

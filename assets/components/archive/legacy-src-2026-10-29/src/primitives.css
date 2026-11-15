@@ -1,0 +1,477 @@
+/* ══ L1 基础件：按钮、表单、表格、标签、树、日期、上传、弹层等 ══ */
+/* ── 卡片与切角面板 ───────────────────────────────────── */
+.vc-card { background: var(--panel-bg); border: 1px solid var(--panel-line);
+  padding: var(--sp-5); box-shadow: var(--sh-card); }
+.vc-card__head { display: flex; align-items: center; justify-content: space-between;
+  gap: var(--sp-3); margin-bottom: var(--sp-2); }
+.vc-card__head h3 { margin: 0; font-size: var(--fs-h3); color: var(--navy-title); font-weight: 700; }
+.vc-card__desc { margin: 0 0 var(--sp-3); color: var(--gray); font-size: var(--fs-sm); }
+.vc-card__foot { display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid var(--panel-line); padding-top: var(--sp-3);
+  font-size: var(--fs-xs); color: var(--gray); }
+.vc-cut__title { margin: 0 0 var(--sp-2); font-size: var(--fs-h3); color: var(--navy-title); font-weight: 700; }
+
+/* ── 指标卡（大数字＋角标装饰） ───────────────────────── */
+.vc-kpi { position: relative; overflow: hidden; background: var(--panel-bg);
+  border: 1px solid var(--panel-line); padding: var(--sp-4) var(--sp-5); box-shadow: var(--sh-card); }
+.vc-kpi::after { content: ""; position: absolute; right: -18px; top: -18px; width: 64px; height: 64px;
+  border: 1px solid var(--line); transform: rotate(45deg); }
+.vc-kpi b { display: block; font-family: var(--font-disp); font-size: 30px; font-weight: 700;
+  line-height: 1.15; letter-spacing: .01em; font-variant-numeric: tabular-nums; color: var(--teal); }
+.vc-kpi .vc-kpi__lbl { font-size: var(--fs-xs); color: var(--gray); }
+.vc-kpi .vc-kpi__delta { font-family: var(--font-num); font-size: var(--fs-xs); color: var(--ok); }
+.vc-kpi--amber b { color: var(--gold); }
+.vc-kpi--err b { color: var(--err); }
+
+/* ── 按钮 ─────────────────────────────────────────────── */
+.vc-btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  padding: 7px var(--sp-4); border: 1px solid var(--line); background: var(--panel-bg-2);
+  color: var(--ink); font-family: var(--font-ui); font-size: var(--fs-sm); letter-spacing: .05em;
+  cursor: pointer; transition: .18s; }
+.vc-btn:hover { border-color: var(--teal-web); color: var(--teal-web); }
+.vc-btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.vc-btn--primary { background: var(--btn-primary-bg); color: var(--btn-primary-fg);
+  border-color: transparent; font-weight: 700; box-shadow: 0 2px 8px rgba(178, 106, 0, .25); }
+.vc-btn--primary:hover { filter: brightness(1.08); color: var(--btn-primary-fg); }
+.vc-btn--danger { background: var(--btn-danger-bg); border-color: transparent; color: var(--btn-danger-fg); }
+.vc-btn--danger:hover { filter: brightness(1.06); color: var(--btn-danger-fg); }
+.vc-btn--text { border-color: transparent; background: transparent; color: var(--teal-web); padding: 6px 8px; }
+.vc-btn--text:hover { color: var(--gold); border-color: transparent; text-decoration: underline; }
+.vc-btn--brand { background: var(--btn-primary-bg); border-color: transparent;
+  color: var(--btn-primary-fg); font-weight: 700; }
+.vc-btn--brand:hover { filter: brightness(1.08); color: var(--btn-primary-fg); }
+.vc-btn--lg { padding: 11px var(--sp-5); font-size: var(--fs-body); }
+.vc-btn--sm { padding: 4px 10px; font-size: var(--fs-xs); font-family: var(--font-num); }
+.vc-btn--block { display: flex; width: 100%; }
+.vc-btn:disabled, .vc-btn[aria-disabled="true"] { opacity: .5; cursor: not-allowed; filter: none; }
+
+/* ── 下拉菜单（次操作收口；菜单只放入口，不承载状态开关） ─ */
+.vc-dropdown { position: relative; display: inline-flex; align-items: center; }
+.vc-dropdown__trigger { display: flex; align-items: center; gap: 10px; padding: 4px 6px;
+  border: 0; background: transparent; color: inherit; font-family: var(--font-ui);
+  font-size: var(--fs-sm); text-align: left; cursor: pointer; transition: .18s; }
+.vc-dropdown__trigger:hover,
+.vc-dropdown__trigger[aria-expanded="true"] { background: var(--bg-deep); }
+.vc-dropdown__trigger:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.vc-dropdown__caret { flex: none; width: 6px; height: 6px; margin-top: -3px;
+  border-right: 1.2px solid currentColor; border-bottom: 1.2px solid currentColor;
+  transform: rotate(45deg); opacity: .55; transition: transform .18s ease; }
+.vc-dropdown__trigger[aria-expanded="true"] .vc-dropdown__caret { margin-top: 3px; transform: rotate(-135deg); }
+.vc-dropdown__menu { position: absolute; right: 0; top: calc(100% + 10px); z-index: 30;
+  min-width: 216px; padding: var(--sp-2); background: var(--panel-bg);
+  border: 1px solid var(--line); box-shadow: var(--sh-pop); }
+.vc-dropdown__menu[hidden] { display: none; }
+.vc-dropdown__item { display: flex; align-items: center; gap: 10px; width: 100%;
+  padding: 9px var(--sp-3); border: 0; background: transparent; color: var(--ink);
+  font-family: var(--font-ui); font-size: var(--fs-sm); text-align: left; cursor: pointer;
+  transition: background-color .16s ease; }
+.vc-dropdown__item:hover { background: var(--bg-deep); }
+.vc-dropdown__item:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--teal-web); }
+.vc-dropdown__item--danger { color: var(--err); }
+.vc-dropdown__text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.vc-dropdown__text b { font-weight: 500; font-size: var(--fs-sm); line-height: 1.35; }
+.vc-dropdown__text small { font-size: var(--fs-xs); line-height: 1.35; color: var(--gray-l); }
+.vc-dropdown__sep { height: 1px; margin: var(--sp-1) 0; background: var(--line-soft); }
+
+/* ── 查询区（4 列栅格，操作靠右收口） ─────────────────── */
+.vc-search { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--sp-3) var(--sp-4); background: var(--panel-bg); border: 1px solid var(--panel-line);
+  padding: var(--sp-4); margin-bottom: var(--sp-4); box-shadow: var(--sh-card); }
+.vc-search__item > label { display: block; margin-bottom: 6px; font-family: var(--font-ui);
+  font-size: var(--fs-xs); letter-spacing: .04em; text-transform: uppercase; color: var(--gray); }
+.vc-search__ops { grid-column: 1 / -1; display: flex; gap: var(--sp-2); justify-content: flex-end; }
+/* 条件不足一行（1–3 个）时，操作按钮收进同一行、贴输入框底边靠右 */
+.vc-search[data-fields="1"] .vc-search__ops { grid-column: 2 / -1; align-self: end; }
+.vc-search[data-fields="2"] .vc-search__ops { grid-column: 3 / -1; align-self: end; }
+.vc-search[data-fields="3"] .vc-search__ops { grid-column: 4 / -1; align-self: end; }
+
+/* ── 表单 ─────────────────────────────────────────────── */
+.vc-field { display: block; margin-bottom: var(--sp-4); }
+.vc-field__label { display: flex; align-items: center; justify-content: flex-start; gap: 0;
+  margin-bottom: 6px; font-family: var(--font-ui); font-size: var(--fs-xs);
+  letter-spacing: .04em; text-transform: uppercase; color: var(--gray); }
+.vc-field__req { color: var(--err); margin-right: 2px; }
+.vc-field__hint { display: block; margin-top: 6px; font-size: var(--fs-xs); color: var(--gray-l); }
+.vc-field__err { display: block; margin-top: 6px; font-family: var(--font-num);
+  font-size: var(--fs-xs); color: var(--err); }
+.vc-field--invalid .vc-input, .vc-field--invalid .vc-select,
+.vc-field--invalid .vc-textarea, .vc-field--invalid .vc-input-group { border-color: var(--err); }
+.vc-input, .vc-select, .vc-textarea { width: 100%;
+  background: var(--panel-bg-2); border: 1px solid var(--line); border-radius: 0;
+  font-family: var(--font-ui); font-size: var(--fs-body); color: var(--ink); }
+/* 单行控件固定高度、不加纵向内边距：Chrome 下 select 的文字不随 padding 垂直居中，
+   靠 line-height 居中，避免文字贴顶被裁。多行输入另行处理。 */
+.vc-input, .vc-select { height: 42px; padding: 0 var(--sp-3); }
+.vc-select { line-height: 40px; padding-right: 28px; }
+.vc-textarea { min-height: 76px; padding: 10px var(--sp-3); line-height: 1.65; resize: vertical; }
+.vc-input:focus, .vc-select:focus, .vc-textarea:focus { outline: none;
+  border-color: var(--teal-web); box-shadow: var(--focus-ring); }
+.vc-input:disabled, .vc-select:disabled, .vc-textarea:disabled {
+  background: var(--bg-deep); color: var(--gray-l); cursor: not-allowed; }
+.vc-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-4); }
+.vc-form-grid > .vc-field--span2 { grid-column: 1 / -1; }
+
+/* 输入框组（图标＋输入控件） */
+.vc-input-group { display: flex; align-items: center; height: 44px;
+  padding: 0 var(--sp-3); background: var(--panel-bg-2); border: 1px solid var(--line);
+  transition: border-color .2s, box-shadow .2s; }
+.vc-input-group:hover { border-color: var(--steel); }
+.vc-input-group:focus-within { border-color: var(--teal-web); box-shadow: var(--focus-ring); }
+.vc-input-group.is-invalid { border-color: var(--err); }
+.vc-input-group__icon { flex: none; width: 16px; height: 16px; color: var(--gray-l); }
+.vc-input-group:focus-within .vc-input-group__icon { color: var(--teal-web); }
+.vc-input-group > input { flex: 1; min-width: 0; height: 100%; border: 0; outline: 0;
+  background: transparent; font-family: var(--font-ui); font-size: var(--fs-body); color: var(--ink); }
+.vc-input-group > input::placeholder { color: var(--gray-l); }
+
+/* 开关 */
+.vc-switch { width: 36px; height: 19px; flex: none; border-radius: 10px; position: relative;
+  background: var(--panel-bg-3); border: 1px solid var(--line); transition: .2s; cursor: pointer; }
+.vc-switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 13px; height: 13px;
+  border-radius: 50%; background: var(--gray-l); transition: .2s; }
+.vc-switch.is-on { background: var(--ok-bg); border-color: var(--ok); }
+.vc-switch.is-on::after { left: 19px; background: var(--ok); }
+
+/* ── 表格 ─────────────────────────────────────────────── */
+.vc-table__wrap { width: 100%; overflow-x: auto; background: var(--panel-bg);
+  border: 1px solid var(--panel-line); box-shadow: var(--sh-card); }
+/* 列表标准：单元格数据一律单行（nowrap），列宽不足时表格横向滚动，不换行、不压行高；
+   超长内容用 .vc-ellipsis 截断并保留 title 提示。见 rules/prototype.md §6 与 schemas/policies/profiles/*.json 的 table 约定 */
+.vc-table { width: 100%; min-width: var(--table-min, 0); border-collapse: collapse; font-size: var(--fs-sm); }
+.vc-table th { background: var(--table-head-bg); color: var(--table-head-fg);
+  font-family: var(--font-ui); font-size: var(--fs-xs); font-weight: 400;
+  letter-spacing: .04em; text-transform: uppercase; text-align: left;
+  padding: 10px var(--sp-3); border-bottom: 1px solid var(--line); white-space: nowrap; }
+.vc-table td { padding: var(--sp-3); border-bottom: 1px solid var(--panel-line);
+  color: var(--ink); vertical-align: middle; white-space: nowrap; }
+.vc-table tbody tr:hover { background: var(--table-row-hover); }
+.vc-table--num td:not(:first-child) { font-family: var(--font-num); }
+.vc-table__num { text-align: right; font-family: var(--font-num); font-variant-numeric: tabular-nums; }
+.vc-table__ops { text-align: right; white-space: nowrap; }
+/* 操作列按内容收紧：避免末列吞掉表格剩余宽度，把按钮甩到远离数据的位置 */
+.vc-table th.vc-table__ops, .vc-table td.vc-table__ops { width: 1%; }
+.vc-table__state { text-align: left; }
+/* 表头数值/操作列右对齐：压过 .vc-table th 的 text-align:left，与单元格数据对齐一致 */
+.vc-table th.vc-table__num, .vc-table th.vc-table__ops { text-align: right; }
+.vc-ellipsis { display: inline-block; max-width: 240px; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; vertical-align: bottom; }
+.vc-table--freeze th:first-child, .vc-table--freeze td:first-child {
+  position: sticky; left: 0; z-index: 1; background: var(--table-sticky-bg); }
+.vc-table--freeze tbody tr:nth-child(even) td:first-child { background: var(--panel-bg-2); }
+.vc-table--freeze th:first-child { background: var(--table-head-bg); }
+/* 操作列钉住右侧：列溢出横向滚动时「编辑／删除」始终可见；未溢出不产生视觉差 */
+.vc-table td.vc-table__ops { position: sticky; right: 0; z-index: 1; background: var(--table-sticky-bg);
+  box-shadow: -1px 0 0 var(--panel-line); }
+.vc-table th.vc-table__ops { position: sticky; right: 0; z-index: 1; box-shadow: -1px 0 0 var(--panel-line); }
+/* 悬停底色必须为实色：用半透明的 --table-row-hover 会让滚动到下方的单元格文字透出（叠字） */
+.vc-table tbody tr:hover td.vc-table__ops { background: var(--table-sticky-hover); }
+.vc-table--freeze tbody tr:hover td:first-child { background: var(--table-sticky-hover); }
+.vc-table__empty { padding: var(--sp-5); text-align: center; color: var(--gray); font-size: var(--fs-sm); }
+/* 表格内原生勾选框与 vc-check 观感对齐 */
+.vc-table input[type="checkbox"] { width: 15px; height: 15px; margin: 0; vertical-align: middle; accent-color: var(--teal); }
+
+/* ── 分页 ─────────────────────────────────────────────── */
+.vc-pager { display: flex; align-items: center; justify-content: space-between;
+  gap: var(--sp-3); padding: var(--sp-3) 0; font-size: var(--fs-sm); }
+.vc-pager__total { color: var(--gray); }
+.vc-pager__right { display: flex; align-items: center; gap: var(--sp-2); }
+.vc-pager__size { height: 30px; padding: 0 var(--sp-2); background: var(--panel-bg-2);
+  border: 1px solid var(--line); color: var(--ink); font-family: var(--font-num);
+  font-size: var(--fs-xs); cursor: pointer; }
+.vc-pager__size:hover { border-color: var(--teal-web); color: var(--teal-web); }
+.vc-pager__btn { min-width: 32px; height: 30px; padding: 0 var(--sp-2); background: var(--panel-bg-2);
+  border: 1px solid var(--line); color: var(--ink); font-family: var(--font-num);
+  font-size: var(--fs-xs); cursor: pointer; }
+.vc-pager__btn:hover { border-color: var(--teal-web); color: var(--teal-web); }
+.vc-pager__btn.is-current { background: var(--teal); border-color: var(--teal); color: #fff; }
+.vc-pager__btn:disabled { opacity: .5; cursor: not-allowed; }
+
+/* ── 标签与徽标（方形工业标签，文字＋颜色双编码） ─────── */
+.vc-tag { display: inline-flex; align-items: center; gap: 6px; padding: 2px 10px;
+  font-family: var(--font-num); font-size: 11.5px; line-height: 18px;
+  color: var(--teal-web); border: 1px solid var(--tag-line); background: var(--tag-bg); }
+.vc-tag--ok { color: var(--ok); border-color: var(--ok-line); background: var(--ok-soft); }
+.vc-tag--warn { color: var(--warn); border-color: var(--warn-line); background: var(--warn-soft); }
+.vc-tag--err { color: var(--err); border-color: var(--err-line); background: var(--err-soft); }
+.vc-tag--info { color: var(--teal); border-color: var(--tag-line); background: var(--tag-bg); }
+.vc-tag--run { color: var(--teal-web); border-color: var(--tag-line); background: var(--tag-bg); }
+.vc-tag--muted { color: var(--gray); border-color: var(--line); background: transparent; }
+.vc-badge { display: inline-flex; align-items: center; gap: 5px; padding: 2px 9px;
+  font-family: var(--font-num); font-size: 11px; line-height: 18px;
+  background: var(--ok-soft); color: var(--ok); border: 1px solid var(--ok-line); }
+
+/* ── 描述列表 ─────────────────────────────────────────── */
+.vc-desc { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px; background: var(--panel-line); border: 1px solid var(--panel-line); }
+.vc-desc--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.vc-desc--1 { grid-template-columns: minmax(0, 1fr); }
+.vc-desc__item { display: flex; background: var(--panel-bg); min-height: 40px; }
+/* 字段名与列表表头同一字体口径（正文无衬线、12px、常规字重、表头灰） */
+.vc-desc__k { flex: 0 0 132px; padding: var(--sp-2) var(--sp-3); background: var(--panel-bg-2);
+  font-family: var(--font-ui); font-size: var(--fs-xs); font-weight: 400;
+  letter-spacing: .04em; color: var(--table-head-fg); }
+.vc-desc__v { flex: 1; padding: var(--sp-2) var(--sp-3); color: var(--ink); font-size: var(--fs-sm); }
+
+/* ── 步骤条 ───────────────────────────────────────────── */
+.vc-steps { display: flex; gap: var(--sp-3); flex-wrap: wrap; list-style: none; margin: 0; padding: 0; }
+.vc-steps li { flex: 1 1 160px; border-top: 3px solid var(--line); padding-top: var(--sp-2); }
+.vc-steps li.is-done { border-top-color: var(--ok); }
+.vc-steps li.is-active { border-top-color: var(--gold-web); }
+.vc-steps__no { font-family: var(--font-num); color: var(--gray-l); font-size: var(--fs-label);
+  letter-spacing: .16em; text-transform: uppercase; }
+.vc-steps__name { display: block; color: var(--navy-title); font-weight: 700; }
+.vc-steps__desc { color: var(--gray); font-size: var(--fs-xs); }
+
+/* ── 页签（详情多页签；右侧可挂工具区） ───────────────── */
+.vc-tabs { display: flex; align-items: stretch; gap: var(--sp-1);
+  border-bottom: 1px solid var(--panel-line); margin-bottom: var(--sp-4); overflow-x: auto; }
+.vc-tabs__item { position: relative; flex: none; padding: 10px var(--sp-3);
+  border: 0; border-bottom: 2px solid transparent; background: transparent;
+  color: var(--gray); font-family: var(--font-ui); font-size: var(--fs-sm);
+  letter-spacing: .02em; white-space: nowrap; cursor: pointer; transition: .18s; }
+.vc-tabs__item:hover { color: var(--ink); background: var(--bg-soft); }
+.vc-tabs__item:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.vc-tabs__item--active { color: var(--nav-active-fg); border-bottom-color: var(--gold-web); font-weight: 700; }
+.vc-tabs__extra { margin-left: auto; display: flex; align-items: center; gap: var(--sp-2); padding-bottom: 6px; }
+.vc-tabpanel[hidden] { display: none; }
+
+/* ── 模态与抽屉 ───────────────────────────────────────── */
+.vc-modal__mask, .vc-drawer__mask { position: fixed; inset: 0; background: var(--mask); z-index: 20; }
+.vc-modal { position: fixed; left: 50%; top: 8vh; transform: translateX(-50%); z-index: 21;
+  width: min(700px, 92vw); max-height: 84vh; overflow: auto; background: var(--panel-bg);
+  border: 1px solid var(--line); box-shadow: var(--sh-pop); }
+.vc-modal--narrow { width: min(500px, 92vw); }
+.vc-modal__head, .vc-drawer__head { display: flex; align-items: center; justify-content: space-between;
+  padding: var(--sp-4) var(--sp-5); border-bottom: 1px solid var(--panel-line); }
+.vc-modal__head h3, .vc-drawer__head h3 { margin: 0; font-size: var(--fs-h3); color: var(--navy-title); }
+.vc-modal__body, .vc-drawer__body { padding: var(--sp-5); }
+.vc-modal__foot, .vc-drawer__foot { display: flex; justify-content: flex-end; gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-5); border-top: 1px solid var(--panel-line); }
+.vc-drawer { position: fixed; right: 0; top: 0; bottom: 0; z-index: 21; width: min(640px, 92vw);
+  display: flex; flex-direction: column; background: var(--panel-bg); box-shadow: var(--sh-pop); }
+.vc-drawer--narrow { width: min(480px, 92vw); }
+.vc-drawer__body { overflow: auto; }
+
+/* ── 加载：spinner、骨架、进度 ────────────────────────── */
+@keyframes vc-spin { to { transform: rotate(360deg); } }
+.vc-spin { display: inline-block; width: 16px; height: 16px; border: 2px solid var(--teal-l);
+  border-top-color: var(--teal); border-radius: 50%; animation: vc-spin 1s linear infinite;
+  vertical-align: -2px; }
+.vc-skeleton { display: flex; flex-direction: column; gap: var(--sp-2); padding: var(--sp-3); }
+.vc-skeleton__line { height: 12px; background: var(--panel-bg-2); }
+.vc-skeleton__line--w60 { width: 60%; }
+.vc-skeleton__line--w80 { width: 80%; }
+.vc-progress { height: 6px; background: var(--panel-bg-3); overflow: hidden; }
+.vc-progress__bar { height: 100%; background: var(--teal-web); }
+
+/* ── 提示条与注释 ─────────────────────────────────────── */
+.vc-alert { display: flex; gap: var(--sp-2); padding: var(--sp-2) var(--sp-3);
+  font-size: var(--fs-sm); background: var(--info-bg); color: var(--info);
+  border-left: 3px solid var(--info); }
+.vc-alert--ok { background: var(--ok-bg); color: var(--ok); border-left-color: var(--ok); }
+.vc-alert--warn { background: var(--warn-bg); color: var(--warn); border-left-color: var(--warn); }
+.vc-alert--err { background: var(--err-bg); color: var(--err); border-left-color: var(--err); }
+.vc-alert[hidden], .vc-note[hidden], .vc-state[hidden], .vc-card[hidden], .vc-kpi[hidden], .vc-stat[hidden], .vc-chart[hidden] { display: none; }
+.vc-note { background: var(--bg-note); border-left: 3px solid var(--teal-web);
+  padding: var(--sp-2) var(--sp-3); color: var(--gray); font-size: var(--fs-sm); }
+
+/* ── 指标卡（兼容旧命名） ─────────────────────────────── */
+.vc-stat { background: var(--panel-bg); border: 1px solid var(--panel-line);
+  padding: var(--sp-4) var(--sp-5); box-shadow: var(--sh-card); }
+.vc-stat__label { font-size: var(--fs-xs); color: var(--gray); }
+.vc-stat__value { display: block; margin: var(--sp-1) 0; font-family: var(--font-disp);
+  font-size: 30px; font-weight: 700; line-height: 1.15; letter-spacing: .01em;
+  font-variant-numeric: tabular-nums; color: var(--teal); }
+.vc-stat__delta { font-family: var(--font-num); font-size: var(--fs-xs); color: var(--gray); }
+
+/* ── 图表容器 ─────────────────────────────────────────── */
+.vc-chart { background: var(--panel-bg); border: 1px solid var(--panel-line);
+  padding: var(--sp-5); box-shadow: var(--sh-card); }
+.vc-chart__cap { margin: var(--sp-3) 0 0; font-size: var(--fs-xs); color: var(--gray-l); }
+
+/* ── 复选框组（批量勾选／列设置／能力开关；与 vc-field 校验态联动） ── */
+.vc-check-group { display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-4); }
+.vc-check-group--col { flex-direction: column; gap: var(--sp-2); }
+.vc-check { display: inline-flex; align-items: flex-start; gap: var(--sp-2); position: relative; cursor: pointer; }
+.vc-check input { position: absolute; opacity: 0; width: 0; height: 0; }
+.vc-check__box { flex: none; width: 16px; height: 16px; margin-top: 2px; border: 1px solid var(--line);
+  background: var(--panel-bg-2); display: grid; place-items: center; transition: .18s; }
+.vc-check__box::after { content: ""; width: 8px; height: 4px; margin-top: -2px;
+  border-left: 2px solid var(--panel-bg); border-bottom: 2px solid var(--panel-bg);
+  transform: rotate(-45deg) scale(0); transition: transform .15s; }
+.vc-check input:checked + .vc-check__box { background: var(--teal); border-color: var(--teal); }
+.vc-check input:checked + .vc-check__box::after { transform: rotate(-45deg) scale(1); }
+.vc-check input:indeterminate + .vc-check__box { background: var(--teal); border-color: var(--teal); }
+.vc-check input:indeterminate + .vc-check__box::after { width: 8px; height: 0; margin-top: 0;
+  border-left: 0; border-bottom: 2px solid var(--panel-bg); transform: none; }
+.vc-check input:focus-visible + .vc-check__box { box-shadow: var(--focus-ring); }
+.vc-check input:disabled + .vc-check__box { background: var(--bg-deep); border-color: var(--line); opacity: .6; }
+.vc-check input:disabled ~ .vc-check__label { color: var(--gray-l); cursor: not-allowed; }
+.vc-check__label { font-size: var(--fs-sm); color: var(--ink); line-height: 1.5; }
+.vc-check--conflict .vc-check__box { border-color: var(--err); }
+.vc-check__note { display: block; font-size: var(--fs-xs); color: var(--err); }
+.vc-field--invalid .vc-check__box { border-color: var(--err); }
+
+/* ── 单选组（生效方式／计费周期；≤4 项枚举直接可见） ── */
+.vc-radio-group { display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-4); }
+.vc-radio-group--col { flex-direction: column; gap: var(--sp-2); }
+.vc-radio { display: inline-flex; align-items: flex-start; gap: var(--sp-2); position: relative; cursor: pointer; }
+.vc-radio input { position: absolute; opacity: 0; width: 0; height: 0; }
+.vc-radio__box { flex: none; width: 16px; height: 16px; margin-top: 2px; border: 1px solid var(--line);
+  border-radius: 50%; background: var(--panel-bg-2); display: grid; place-items: center; transition: .18s; }
+.vc-radio__box::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--teal);
+  transform: scale(0); transition: transform .15s; }
+.vc-radio input:checked + .vc-radio__box { border-color: var(--teal); }
+.vc-radio input:checked + .vc-radio__box::after { transform: scale(1); }
+.vc-radio input:focus-visible + .vc-radio__box { box-shadow: var(--focus-ring); }
+.vc-radio input:disabled + .vc-radio__box { background: var(--bg-deep); border-color: var(--line); }
+.vc-radio input:disabled ~ .vc-radio__label { color: var(--gray-l); cursor: not-allowed; }
+.vc-radio__label { font-size: var(--fs-sm); color: var(--ink); line-height: 1.5; }
+.vc-radio__hint { display: block; font-size: var(--fs-xs); color: var(--gray-l); }
+.vc-field--invalid .vc-radio__box { border-color: var(--err); }
+
+/* ── 文件上传（批量导入：拖拽区＋文件列表＋进度＋校验汇总） ── */
+.vc-upload { display: flex; flex-direction: column; gap: var(--sp-3); }
+.vc-upload__drop { display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: var(--sp-2); padding: var(--sp-5); border: 1.5px dashed var(--line); background: var(--panel-bg-2);
+  color: var(--gray); text-align: center; cursor: pointer; transition: .18s; }
+.vc-upload__drop:hover, .vc-upload__drop.is-over { border-color: var(--teal-web); background: var(--tag-bg); color: var(--teal); }
+.vc-upload__drop b { color: var(--navy-title); font-size: var(--fs-sm); }
+.vc-upload__hint { font-family: var(--font-num); font-size: var(--fs-xs); color: var(--gray-l); }
+.vc-upload__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-2); }
+.vc-upload__item { display: grid; grid-template-columns: auto minmax(0,1fr) auto auto; align-items: center;
+  gap: var(--sp-2) var(--sp-3); padding: var(--sp-2) var(--sp-3); border: 1px solid var(--panel-line); background: var(--panel-bg); }
+.vc-upload__name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--fs-sm); color: var(--ink); }
+.vc-upload__size { font-family: var(--font-num); font-size: var(--fs-xs); color: var(--gray-l); }
+.vc-upload__state { font-family: var(--font-num); font-size: var(--fs-xs); }
+.vc-upload__state--ok { color: var(--ok); }
+.vc-upload__state--err { color: var(--err); }
+.vc-upload__x { border: 0; background: transparent; color: var(--gray-l); cursor: pointer; font-size: 14px; line-height: 1; }
+.vc-upload__x:hover { color: var(--err); }
+.vc-upload__bar { grid-column: 1 / -1; height: 4px; background: var(--panel-bg-3); overflow: hidden; }
+.vc-upload__bar i { display: block; height: 100%; background: var(--teal-web); }
+.vc-upload__item--ok { border-color: var(--ok-line); }
+.vc-upload__item--ok .vc-upload__bar i { background: var(--ok); }
+.vc-upload__item--err { border-color: var(--err-line); background: var(--err-soft); }
+.vc-upload__item--err .vc-upload__bar i { background: var(--err); }
+.vc-upload__summary { display: flex; flex-wrap: wrap; gap: var(--sp-3); padding: var(--sp-2) var(--sp-3);
+  background: var(--bg-note); border-left: 3px solid var(--teal-web); font-family: var(--font-num); font-size: var(--fs-xs); color: var(--gray); }
+.vc-upload__summary b { color: var(--navy-title); }
+.vc-upload__summary .ok { color: var(--ok); }
+.vc-upload__summary .err { color: var(--err); }
+
+/* ── 树形（企业→工厂→工艺单元→实例四级左树；只读选中／勾选／状态点／整栏折叠） ── */
+.vc-tree { list-style: none; margin: 0; padding: 0; font-size: var(--fs-sm); }
+.vc-tree .vc-tree { padding-left: var(--sp-4); }
+.vc-tree__node { position: relative; }
+.vc-tree__row { display: flex; align-items: center; gap: 6px; padding: 5px var(--sp-2); cursor: pointer;
+  border: 1px solid transparent; }
+.vc-tree__row:hover { background: var(--bg-soft); }
+.vc-tree__row.is-active { background: var(--nav-active-bg); border-color: var(--warn-line); }
+.vc-tree__toggle { flex: none; width: 14px; height: 14px; display: grid; place-items: center; border: 0;
+  background: transparent; color: var(--gray-l); cursor: pointer; }
+.vc-tree__toggle::before { content: ""; width: 6px; height: 6px;
+  border-right: 1.4px solid currentColor; border-bottom: 1.4px solid currentColor;
+  transform: rotate(-45deg); transition: transform .18s; }
+.vc-tree__node.is-open > .vc-tree__row .vc-tree__toggle::before { transform: rotate(45deg); }
+.vc-tree__toggle--leaf { visibility: hidden; }
+.vc-tree__label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink); }
+.vc-tree__row.is-active .vc-tree__label { color: var(--nav-active-fg); font-weight: 700; }
+.vc-tree__count { flex: none; font-family: var(--font-num); font-size: var(--fs-label); color: var(--gray-l); }
+.vc-tree__children { display: none; list-style: none; margin: 0; padding-left: var(--sp-4); }
+.vc-tree__node.is-open > .vc-tree__children { display: block; }
+
+/* ── 悬浮提示（发布前检查逐条未通过项／字段口径；纯 CSS，悬停与键盘聚焦触发） ── */
+.vc-tooltip { position: relative; display: inline-flex; }
+.vc-tooltip__body { position: absolute; z-index: 40; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%);
+  width: max-content; max-width: 240px; padding: 6px var(--sp-2); background: var(--navy); color: var(--panel-bg);
+  font-size: var(--fs-xs); font-weight: 400; line-height: 1.6; text-align: left; box-shadow: var(--sh-pop);
+  opacity: 0; visibility: hidden; transition: opacity .15s; pointer-events: none; }
+.vc-tooltip__body::after { content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+  border: 5px solid transparent; border-top-color: var(--navy); }
+.vc-tooltip:hover > .vc-tooltip__body, .vc-tooltip:focus-within > .vc-tooltip__body { opacity: 1; visibility: visible; }
+.vc-tooltip__body ul { margin: 0; padding-left: 16px; }
+.vc-tooltip__body--right { bottom: auto; left: calc(100% + 8px); top: 50%; transform: translateY(-50%); }
+.vc-tooltip__body--right::after { top: 50%; left: auto; right: 100%; transform: translateY(-50%);
+  border-top-color: transparent; border-right-color: var(--navy); }
+.vc-tooltip__body--left { bottom: auto; left: auto; right: calc(100% + 8px); top: 50%; transform: translateY(-50%); }
+.vc-tooltip__body--left::after { top: 50%; left: 100%; right: auto; transform: translateY(-50%);
+  border-top-color: transparent; border-left-color: var(--navy); }
+.vc-tooltip__body--bottom { bottom: auto; top: calc(100% + 8px); }
+.vc-tooltip__body--bottom::after { top: auto; bottom: 100%; border-top-color: transparent; border-bottom-color: var(--navy); }
+
+/* ── 折叠容器（变量字典分组折叠；组头带计数与操作，全部展开／收起联动） ── */
+.vc-collapse { border: 1px solid var(--panel-line); background: var(--panel-bg); }
+.vc-collapse__item + .vc-collapse__item { border-top: 1px solid var(--panel-line); }
+.vc-collapse__head { display: flex; align-items: center; gap: var(--sp-2); width: 100%; padding: var(--sp-3) var(--sp-4);
+  border: 0; background: var(--panel-bg-2); color: var(--navy-title); font-family: var(--font-ui);
+  font-size: var(--fs-sm); font-weight: 700; text-align: left; cursor: pointer; }
+.vc-collapse__head:hover { background: var(--bg-soft); }
+.vc-collapse__head:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.vc-collapse__caret { flex: none; width: 7px; height: 7px; color: var(--gray-l);
+  border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg); transition: transform .18s; }
+.vc-collapse__item.is-open .vc-collapse__caret { transform: rotate(45deg); }
+.vc-collapse__title { flex: 1; min-width: 0; }
+.vc-collapse__count { flex: none; font-family: var(--font-num); font-size: var(--fs-xs); font-weight: 400; color: var(--gray-l); }
+.vc-collapse__body { display: none; padding: var(--sp-4); border-top: 1px solid var(--panel-line); }
+.vc-collapse__item.is-open .vc-collapse__body { display: block; }
+
+/* ── 日期与范围选择（单日期／范围含快捷项；面板为静态视觉，逻辑由页面脚本驱动） ── */
+.vc-datepicker { display: inline-flex; flex-direction: column; gap: var(--sp-2); }
+.vc-datepicker__trigger { display: flex; align-items: center; gap: var(--sp-2); height: 40px; padding: 0 var(--sp-3);
+  min-width: 240px; background: var(--panel-bg-2); border: 1px solid var(--line); font-family: var(--font-num);
+  font-size: var(--fs-sm); color: var(--ink); cursor: pointer; }
+.vc-datepicker__trigger:hover { border-color: var(--steel); }
+.vc-datepicker__trigger svg { width: 15px; height: 15px; flex: none; color: var(--gray-l); }
+.vc-datepicker__trigger .ph { color: var(--gray-l); }
+.vc-datepicker__sep { color: var(--gray-l); }
+.vc-datepicker__panel { display: inline-flex; gap: var(--sp-3); padding: var(--sp-3); background: var(--panel-bg);
+  border: 1px solid var(--line); box-shadow: var(--sh-pop); }
+.vc-datepicker__quick { display: flex; flex-direction: column; gap: 4px; border-right: 1px solid var(--panel-line); padding-right: var(--sp-3); }
+.vc-datepicker__quick button { border: 0; background: transparent; text-align: left; padding: 4px var(--sp-2);
+  font-size: var(--fs-xs); color: var(--teal); cursor: pointer; white-space: nowrap; }
+.vc-datepicker__quick button:hover { background: var(--bg-soft); }
+.vc-datepicker__cal { width: 230px; }
+.vc-datepicker__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--sp-2); }
+.vc-datepicker__head b { font-size: var(--fs-sm); color: var(--navy-title); }
+.vc-datepicker__nav { width: 22px; height: 22px; display: grid; place-items: center; border: 1px solid var(--line);
+  background: var(--panel-bg-2); color: var(--gray); cursor: pointer; }
+.vc-datepicker__nav:hover { border-color: var(--teal-web); color: var(--teal-web); }
+.vc-datepicker__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; text-align: center; }
+.vc-datepicker__wd { font-family: var(--font-num); font-size: var(--fs-label); color: var(--gray-l); padding: 2px 0; }
+.vc-datepicker__cell { height: 26px; border: 0; background: transparent; font-family: var(--font-num);
+  font-size: var(--fs-xs); color: var(--ink); cursor: pointer; }
+.vc-datepicker__cell:hover { background: var(--bg-deep); }
+.vc-datepicker__cell.is-out { color: var(--gray-l); opacity: .5; }
+.vc-datepicker__cell.is-today { border: 1px solid var(--teal-web); color: var(--teal); }
+.vc-datepicker__cell.is-in { background: var(--tag-bg); color: var(--teal); }
+.vc-datepicker__cell.is-sel { background: var(--teal); color: var(--panel-bg); }
+@media (prefers-reduced-motion: reduce) {
+  .vc-line__st::before, .vc-line__led, .vc-line__card { animation: none; }
+  .vc-line__card:hover, .vc-line__card:focus-visible { transform: none; }
+}
+@media print {
+  .vc-line__card { transform: none !important; box-shadow: none; }
+  .vc-line__st::before, .vc-line__led { animation: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .vc-chat__dots i { animation: none; opacity: .6; }
+  .vc-rail, .vc-chat__row { transition: none; }
+}
+
+
+/* 日期范围变体（parts/datepicker.html 使用；范围触发器加宽，两端日期与分隔符同屏） */
+.vc-datepicker--range .vc-datepicker__trigger { min-width: 300px; }
+
+/* 树形勾选变体（parts/tree.html 使用；勾选框与树行对齐） */
+.vc-tree--check .vc-tree__row { gap: 4px; }
+.vc-tree--check .vc-check { flex: none; margin-bottom: 0; }
+.vc-tree--check .vc-tree__label { padding-left: 2px; }
+
+/* 模态遮罩（与抽屉遮罩同构；overlay 区块使用） */
+.vc-modal__mask { position: fixed; inset: 0; background: var(--mask); z-index: 20; }
+
+/* 视觉隐藏的文件输入（原生成Agent工作台页面私有，上收为基础件） */
+.vc-file-input { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
