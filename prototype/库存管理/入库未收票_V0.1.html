@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>入库收票登记</title><link rel="stylesheet" href="../../assets/components/tokens.css"><link rel="stylesheet" href="../../assets/components/components.css"><style>
+*{box-sizing:border-box}html,body{height:100%;margin:0}body{font:13px var(--font-ui);color:var(--ink);background:var(--bg-page)}button,input,select,textarea{font:inherit}button{cursor:pointer}button:focus-visible{outline:2px solid var(--teal);outline-offset:1px}input:focus,select:focus,textarea:focus{outline:none;box-shadow:none}.page{height:100%;min-height:0;padding:20px 24px;display:flex;flex-direction:column;gap:16px}.head{display:flex;align-items:center;justify-content:space-between;flex:none}.head h1{margin:0;font-size:20px;line-height:1.5}.actions{display:flex;gap:10px}.btn{height:34px;padding:0 14px;border:1px solid var(--line);border-radius:4px;background:var(--panel-bg);color:var(--ink)}.btn:hover{border-color:var(--teal);color:var(--teal)}.btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}.btn:disabled{opacity:.48;cursor:not-allowed}.panel{background:var(--panel-bg);border:1px solid var(--line-soft);border-radius:6px}.query{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 20px;padding:20px 24px;flex:none}.query>label{display:grid;grid-template-columns:96px minmax(0,1fr);align-items:center;gap:8px;color:var(--gray);white-space:nowrap}.control{width:100%;height:32px;padding:5px 8px;border:1px solid var(--line-soft);border-radius:3px;background:var(--panel-bg);color:var(--ink)}.query-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px}.check-field input{width:16px;height:16px;margin:0;justify-self:start;accent-color:var(--teal)}.check-field input:focus-visible{outline:2px solid var(--teal);outline-offset:1px}.list{flex:1;min-height:0;display:flex;flex-direction:column;padding:20px 24px}.table-wrap{flex:1;min-height:0;overflow:auto;border:1px solid var(--line-soft);border-radius:4px}table{width:100%;table-layout:fixed;border-collapse:collapse}th,td{height:44px;padding:8px 12px;text-align:left;border-bottom:1px solid var(--line-soft);white-space:normal;overflow-wrap:anywhere}th{position:sticky;top:0;z-index:2;background:var(--bg-soft);color:var(--gray);font-weight:600}tbody tr:hover{background:#f8fbfc}th.num,td.num{text-align:right;font-variant-numeric:tabular-nums}.empty td{height:160px;text-align:center;color:var(--gray)}.pager{display:flex;align-items:center;gap:12px;padding-top:16px;flex:none}.pager .total{margin-right:auto;color:var(--gray)}.pager select{width:100px}@media(max-width:960px){.query{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:640px){.page{padding:12px}.query{grid-template-columns:1fr}.query-actions{justify-content:flex-start}.head{align-items:flex-start;gap:12px}.actions{flex-wrap:wrap;justify-content:flex-end}}
+th,td{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;overflow-wrap:normal;padding:8px}.query>label{grid-template-columns:110px minmax(0,1fr)}.date-range{grid-column:span 2}.range{display:flex;align-items:center;gap:8px;min-width:0}.range input{min-width:0}.error{color:var(--err);margin:0}.error:empty{display:none}@media(max-width:640px){.date-range{grid-column:span 1}}
+/* 2026-11-20：按内容分配列宽，名称优先；数值列统一右对齐并留足列间距。 */
+#report th,#report td{padding:10px 14px;height:44px;vertical-align:middle}
+#report th{height:42px}
+#report th:nth-child(4),#report td:nth-child(4){text-align:center}
+#report .num{text-align:right;font-variant-numeric:tabular-nums;padding-right:22px}
+#report th:nth-child(8),#report td:nth-child(8){padding-left:22px}
+@media(max-width:1100px){#report th,#report td{padding:8px}#report .num{padding-right:12px}#report th:nth-child(8),#report td:nth-child(8){padding-left:12px}}
+
+#report th,#report td{padding:8px;text-align:left}#report th:nth-child(4),#report td:nth-child(4){text-align:left}#report .num{padding:8px;text-align:right}
+
+.required{color:var(--err);margin-right:3px}#report .entry{min-width:0;height:28px;padding:3px;width:100%;font-size:12px}#report th,#report td{padding:8px 4px}
+
+/* 2026-11-24：本报表允许横向滚动，收票日期及采购发票固定右侧。 */
+.page,.list,.table-wrap{min-width:0}
+.table-wrap{position:relative;isolation:isolate;overflow:auto}
+#report{width:1925px;min-width:1925px;border-collapse:separate;border-spacing:0;table-layout:fixed}
+#report th,#report td{padding:8px 12px;white-space:nowrap}
+#report .num{padding:8px 12px;text-align:right}
+#report .entry{font-size:13px;padding:3px 8px}
+/* 2026-11-25：按指定13列展示，取消原收票日期、采购发票列及其右侧固定样式。 */
+/* 2026-11-25：申购日期、物料编码、物料名称冻结左侧；偏移依次对应105px、85px列宽，表头同步冻结。 */
+#report thead th{z-index:3}
+/* 2026-11-25：前三列收窄至105px、85px、150px，同步表格总宽与冻结偏移。 */
+/* 2026-11-25：最右侧增加收票日期、发票号、单价，可录入并同步导出；冻结右侧三列。单价暂非必填，不增加金额计算。 */
+#report thead th:nth-last-child(-n+2),#report tbody tr:not(.empty) td:nth-last-child(-n+2){position:sticky}
+#report thead th:last-child,#report tbody tr:not(.empty) td:last-child{right:0}
+#report thead th:nth-last-child(2),#report tbody tr:not(.empty) td:nth-last-child(2){right:180px;box-shadow:-3px 0 4px -3px #8295a8}
+#report tbody tr:not(.empty) td:nth-last-child(-n+2){z-index:2;background:var(--panel-bg)}
+#report tbody tr:hover td:nth-last-child(-n+2){background:#f8fbfc}
+#report thead th:nth-last-child(-n+2){z-index:4;background:var(--bg-soft)}
+/* 2026-11-25：按用户最新要求取消左侧申购日期、物料编码、物料名称冻结，仅保留右侧三列冻结。 */
+/* 2026-11-25：最新口径仅冻结最右侧收票日期、发票号；单价移至入库数量后，总价即时计算。 */
+@media(min-width:961px){.query-actions{grid-column:span 3}}
+/* 2026-11-25：按截图收紧列表列宽、行高及横向留白；右侧收票日期、发票号冻结尺寸保持一致。 */
+#report th,#report td{height:40px;padding:6px 8px}
+#report .num{padding:6px 8px;text-align:right}
+#report th:nth-child(8),#report td:nth-child(8){padding-left:8px}
+#report .entry{height:26px;padding:2px 6px}
+/* 2026-11-25：按截图将单价表头左对齐至输入框起始位置。 */
+#report th.unit-price-head{text-align:left;padding-left:8px}
+</style></head><body>
+<!-- 2026-11-25：查询区申购人按用户要求改为文本输入框，按姓名包含匹配；覆盖此前下拉精确匹配口径。 -->
+<!-- 2026-11-25：按用户指定顺序设置10项查询；申购/入库/收票日期均为含首尾范围，申购单号模糊匹配，申购人下拉精确匹配，候选沿用演示人员。 -->
+<!-- 2026-11-25：按用户要求调整为数量、单价、总价；总价=入库数量×单价。AI假设：总价展示及导出保留两位小数，空或无效单价不计算；不推定税额及结算规则。收票日期、发票号录入后保留在页面内存，右侧冻结两列，覆盖此前三列固定说明。 -->
+<!-- 2026-11-25：按用户要求在申购单号与入库单号之间增加申购人列，同步导出；人员沿用项目演示名称，不代表正式申购归属。 -->
+<!-- 2026-11-25：按用户指定顺序重排13个列表字段并同步导出；新增申购日期、申购单号为独立虚构演示数据，不表示正式联动。覆盖历史列表字段与固定列说明。 -->
+<!-- 2026-11-24：按最新要求取消物料编码、物料名称左侧固定；收票日期、采购发票固定最右侧，表头及输入单元格同步固定，覆盖此前固定列口径。 -->
+<!-- 2026-11-24：查询区增加收票日期起止范围，含首尾日期；设置范围时不纳入空收票日期，支持组合查询、日期先后校验及重置。 -->
+<!-- 2026-11-24：新增采购类型下拉及采购发票包含查询；入库日期沿用起止日期范围（含首尾）；移除列表及导出备注字段，同步重置条件与表格总宽度。 -->
+<!-- 2026-11-24：采购类型改为源单带入的只读文本，演示源明细默认轮流填入网购、合同购、实体店；正式值后续由采购入库提供，当前不改动采购入库页面或宣称已联动。覆盖此前默认空及下拉编辑口径。 -->
+<!-- 2026-11-24：按截图反馈收紧冗余列宽，物料名称240px调至180px，编码120px调至100px；同步固定列偏移，保留横向滚动及悬停全文。 -->
+<!-- 2026-11-24：扩大各列宽度以完整展示常用字段，表格内支持左右滚动，物料编码、物料名称两列固定；超长文本仍保留悬停全文。 -->
+<!-- 2026-11-24：按用户要求在入库单号后增加源单明细行号；供应商前增加采购类型下拉（网购、合同购、实体店），默认空；采购发票前增加收票日期。收票日期和采购发票显示必填标记，分别使用日期和文本输入框。输入写入当前页内存源明细，查询、翻页及导出保留，刷新恢复；不执行正式收票或改变收票筛选结果。覆盖此前采购发票只读说明。 -->
+<!-- 2026-11-24：按用户标注移除已收票数量、未收票数量展示及导出列；备注前增加只读采购发票字段。发票内容无来源暂留空，不虚构票号；原有未收票筛选口径保留。 -->
+<!-- 2026-11-24 V0.1：按用户要求根据采购入库制作入库未收票只读报表，复用现有台账样式。
+来源：prototype/库存管理/采购入库_V0.1.html 的单据、物料、供应商和入库数量字段。
+AI假设（待确认）：已入库单据按明细展示，未收票数量=入库数量-已收票数量，仅纳入差额大于0的行，包含完全未收票与部分收票；按入库日期、单号倒序。
+采购入库目前没有发票匹配数据或共享接口。下列单据、数量、日期、供应商关联及收票数据均为独立虚构演示，不表示现场事实或实时取数。
+正式收票来源、匹配粒度、单位换算、退货及红字票处理待确认；不推定财务金额、税额或结算规则，不执行收票登记、核销、审核或库存变更。
+本次新增查询、分页、CSV导出与菜单路由；仅原型演示。 -->
+<!-- 2026-11-24：按用户要求页面名称及导出名称同步更名为入库收票登记。 -->
+<main class="page"><header class="head"><h1>入库收票登记</h1><div class="actions"><button class="btn" id="export">导出</button></div></header>
+<section class="panel query" id="query"><label class="date-range">申购日期<span class="range"><input class="control" type="date" id="q-requisition-start" aria-label="申购日期开始"><span>至</span><input class="control" type="date" id="q-requisition-end" aria-label="申购日期结束"></span></label><label class="date-range">入库日期<span class="range"><input class="control" type="date" id="q-start" aria-label="入库日期开始"><span>至</span><input class="control" type="date" id="q-end" aria-label="入库日期结束"></span></label><label class="date-range">收票日期<span class="range"><input class="control" type="date" id="q-invoice-start" aria-label="收票日期开始"><span>至</span><input class="control" type="date" id="q-invoice-end" aria-label="收票日期结束"></span></label><label>入库单号<input class="control" id="q-code" placeholder="请输入"></label><label>申购单号<input class="control" id="q-requisition" placeholder="请输入"></label><label>采购类型<select class="control" id="q-type"><option value="">全部</option><option>网购</option><option>合同购</option><option>实体店</option></select></label><label>供应商<input class="control" id="q-supplier" placeholder="请输入"></label><label>物料编码或名称<input class="control" id="q-kw" placeholder="请输入"></label><label>发票号<input class="control" id="q-invoice" placeholder="请输入"></label><label>申购人<input class="control" id="q-requisitioner" placeholder="请输入"></label><div class="query-actions"><button class="btn" id="reset">重置</button><button class="btn primary" id="search">查询</button></div></section>
+<p class="error" id="error" role="alert"></p><section class="panel list"><div class="table-wrap"><table id="report"><colgroup><col style="width:100px"><col style="width:80px"><col style="width:145px"><col style="width:75px"><col style="width:50px"><col style="width:80px"><col style="width:100px"><col style="width:95px"><col style="width:85px"><col style="width:190px"><col style="width:105px"><col style="width:145px"><col style="width:80px"><col style="width:125px"><col style="width:50px"><col style="width:85px"><col style="width:155px"><col style="width:180px"></colgroup><thead><tr><th>申购日期</th><th>物料编码</th><th>物料名称</th><th>规格</th><th>单位</th><th class="num">入库数量</th><th class="unit-price-head">单价</th><th class="num">总价</th><th>采购类型</th><th>供应商</th><th>入库日期</th><th>申购单号</th><th>申购人</th><th>入库单号</th><th>行号</th><th>仓库</th><th><span class="required">*</span>收票日期</th><th><span class="required">*</span>发票号</th></tr></thead><tbody id="tbody"></tbody></table></div><footer class="pager" id="pager"></footer></section></main><script>
+'use strict';
+const $=id=>document.getElementById(id),esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const catalog=[['PJ716','PAC','kg',''],['PJ709','聚合硫酸铁（干粉）','kg',''],['PJ715','片碱','kg',''],['PJ978','玻璃珠3-4cm','公斤','3-4cm'],['PJ821','手推车','辆','']].map(([code,name,unit,spec])=>({code,name,unit,spec}));
+const sourceRecords=Array.from({length:9},(_,i)=>({id:'PRI2611'+String(24-i).padStart(2,'0')+'01',status:i===8?'草稿':'已入库',requisitioner:['德清威德','任健忠','杨忠英'][i%3],requisitionDate:'2026-11-'+String(21-i).padStart(2,'0'),requisition:'SG202611'+String(21-i).padStart(2,'0')+'001',date:'2026-11-'+String(24-i).padStart(2,'0'),supplier:['德清宏兴化工有限公司','无锡市必盛水处理剂有限公司','杭州超孟贸易有限公司'][i%3],wh:i%5===3?'化验仓库':i%5===4?'备件仓库':'药剂仓库',items:[{...catalog[i%5],qty:i%5<3?1000:i%5===3?20:2,invoicedQty:i===7?1000:i===6?400:0,purchaseType:['网购','合同购','实体店'][i%3],receiptDate:'',purchaseInvoice:'',unitPrice:'',remark:''}]}));
+let q={},page=1,size=5;
+function rows(){return sourceRecords.filter(r=>r.status==='已入库'&&(!q.requisitionStart||(r.requisitionDate&&r.requisitionDate>=q.requisitionStart))&&(!q.requisitionEnd||(r.requisitionDate&&r.requisitionDate<=q.requisitionEnd))&&(!q.requisition||String(r.requisition||'').toLowerCase().includes(q.requisition.toLowerCase()))&&(!q.requisitioner||String(r.requisitioner||'').includes(q.requisitioner))&&(!q.start||r.date>=q.start)&&(!q.end||r.date<=q.end)&&(!q.code||r.id.toLowerCase().includes(q.code.toLowerCase()))&&(!q.supplier||r.supplier.includes(q.supplier))).sort((a,b)=>b.date.localeCompare(a.date)||b.id.localeCompare(a.id)).flatMap(r=>r.items.map((m,index)=>({...m,lineNo:index+1})).filter(m=>(!q.kw||m.code.toLowerCase().includes(q.kw.toLowerCase())||m.name.includes(q.kw))).map(m=>({id:r.id,date:r.date,requisitionDate:r.requisitionDate,requisition:r.requisition,requisitioner:r.requisitioner,supplier:r.supplier,wh:r.wh,...m,pendingQty:m.qty-m.invoicedQty})).filter(m=>m.pendingQty>0&&(!q.invoiceStart||(m.receiptDate&&m.receiptDate>=q.invoiceStart))&&(!q.invoiceEnd||(m.receiptDate&&m.receiptDate<=q.invoiceEnd))&&(!q.type||m.purchaseType===q.type)&&(!q.invoice||(m.purchaseInvoice||'').toLowerCase().includes(q.invoice.toLowerCase()))))}
+const columns=['requisitionDate', 'code', 'name', 'spec', 'unit', 'qty', 'unitPrice', 'totalPrice', 'purchaseType', 'supplier', 'date', 'requisition', 'requisitioner', 'id', 'lineNo', 'wh', 'receiptDate', 'purchaseInvoice'];
+function button(t,fn,disabled){const b=document.createElement('button');b.className='btn';b.textContent=t;b.onclick=fn;b.disabled=disabled;return b}
+function totalPrice(r){if(r.unitPrice===''||r.unitPrice==null)return '';const price=Number(r.unitPrice),qty=Number(r.qty),total=price*qty;return Number.isFinite(price)&&price>=0&&Number.isFinite(qty)&&Number.isFinite(total)?total.toFixed(2):''}
+function cell(r,k){
+if(k==='totalPrice'){const total=totalPrice(r);return `<td class="num" data-total title="${esc(total)}">${total||'—'}</td>`}
+if(k==='unitPrice')return `<td class="num"><input class="control entry" type="number" min="0" step="any" data-record="${esc(r.id)}" data-line="${r.lineNo}" data-field="unitPrice" value="${esc(r[k]??'')}" placeholder="请输入" aria-label="单价"></td>`;
+if(k==='receiptDate'||k==='purchaseInvoice')return `<td><input class="control entry" type="${k==='receiptDate'?'date':'text'}" data-record="${esc(r.id)}" data-line="${r.lineNo}" data-field="${k}" value="${esc(r[k]||'')}" ${k==='purchaseInvoice'?'placeholder="请输入"':''} required aria-required="true" aria-label="${k==='receiptDate'?'收票日期':'发票号'}（必填）"></td>`;
+return `<td ${k==='qty'?'class="num"':''} title="${esc(r[k]??'')}">${esc(r[k]??'—')}</td>`}
+function updateEntry(e){const t=e.target;if(!t.dataset.field)return;const r=sourceRecords.find(r=>r.id===t.dataset.record),m=r?.items[Number(t.dataset.line)-1];if(m){m[t.dataset.field]=t.value;if(t.dataset.field==='unitPrice'){const cell=t.closest('tr').querySelector('[data-total]'),total=totalPrice(m);cell.textContent=total||'—';cell.title=total;t.setCustomValidity(t.value!==''&&(!Number.isFinite(Number(t.value))||Number(t.value)<0)?'单价须为大于或等于0的数字':'')}}}
+$('tbody').oninput=updateEntry;$('tbody').onchange=updateEntry;
+function render(){const data=rows(),pages=Math.max(1,Math.ceil(data.length/size));page=Math.min(page,pages);$('tbody').innerHTML=data.slice((page-1)*size,page*size).map(r=>'<tr>'+columns.map(k=>cell(r,k)).join('')+'</tr>').join('')||'<tr class="empty"><td colspan="18">暂无数据</td></tr>';
+$('pager').innerHTML=`<span class="total">共 ${data.length} 条</span><span>第 ${page} / ${pages} 页</span><select class="control" id="size" aria-label="每页条数">${[5,10,20,50].map(n=>`<option value="${n}" ${n===size?'selected':''}>${n}条/页</option>`).join('')}</select>`;$('pager').append(button('上一页',()=>{page--;render()},page===1),button('下一页',()=>{page++;render()},page===pages));$('size').onchange=()=>{size=+$('size').value;page=1;render()}}
+function search(){const requisitionStart=$('q-requisition-start').value,requisitionEnd=$('q-requisition-end').value;if(requisitionStart&&requisitionEnd&&requisitionStart>requisitionEnd){$('error').textContent='申购开始日期不能晚于结束日期';return}const start=$('q-start').value,end=$('q-end').value;if(start&&end&&start>end){$('error').textContent='入库开始日期不能晚于结束日期';return}const invoiceStart=$('q-invoice-start').value,invoiceEnd=$('q-invoice-end').value;if(invoiceStart&&invoiceEnd&&invoiceStart>invoiceEnd){$('error').textContent='收票开始日期不能晚于结束日期';return}$('error').textContent='';q={start,end,invoiceStart,invoiceEnd,requisitionStart,requisitionEnd,requisition:$('q-requisition').value.trim(),requisitioner:$('q-requisitioner').value.trim(),code:$('q-code').value.trim(),supplier:$('q-supplier').value.trim(),kw:$('q-kw').value.trim(),type:$('q-type').value,invoice:$('q-invoice').value.trim()};page=1;render()}
+$('search').onclick=search;$('reset').onclick=()=>{['q-requisition-start','q-requisition-end','q-requisition','q-requisitioner','q-start','q-end','q-code','q-supplier','q-kw','q-type','q-invoice','q-invoice-start','q-invoice-end'].forEach(id=>$(id).value='');q={};page=1;$('error').textContent='';render()};$('query').onkeydown=e=>{if(e.key==='Enter')search()};
+function csvText(){const lines=[['申购日期', '物料编码', '物料名称', '规格', '单位', '入库数量', '单价', '总价', '采购类型', '供应商', '入库日期', '申购单号', '申购人', '入库单号', '行号', '仓库', '收票日期', '发票号'],...rows().map(r=>columns.map(k=>k==='totalPrice'?totalPrice(r):(r[k]??'')))];return '\uFEFF'+lines.map(line=>line.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\r\n')}
+$('export').onclick=()=>{const blob=new Blob([csvText()],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='入库收票登记_'+(q.start||'全部')+'_'+(q.end||'全部')+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+render();
+</script></body></html>

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>出入库流水</title><link rel="stylesheet" href="../../assets/components/tokens.css"><link rel="stylesheet" href="../../assets/components/components.css"><style>
+*{box-sizing:border-box}html,body{height:100%;margin:0}body{font:13px var(--font-ui);color:var(--ink);background:var(--bg-page)}button,input,select,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--teal);outline-offset:1px}.page{height:100%;min-height:0;padding:20px 24px;display:flex;flex-direction:column;gap:16px}.head{display:flex;align-items:center;justify-content:space-between;flex:none}.head h1{margin:0;font-size:20px;line-height:1.5}.actions{display:flex;gap:10px}.btn{height:34px;padding:0 14px;border:1px solid var(--line);border-radius:4px;background:var(--panel-bg);color:var(--ink)}.btn:hover{border-color:var(--teal);color:var(--teal)}.btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}.btn:disabled{opacity:.45;cursor:default}.panel{background:var(--panel-bg);border:1px solid var(--line-soft);border-radius:6px}.query{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 20px;padding:20px 24px;flex:none}.query label{display:grid;grid-template-columns:110px minmax(0,1fr);align-items:center;gap:8px;color:var(--gray);white-space:nowrap}.control{width:100%;height:32px;padding:5px 8px;border:1px solid var(--line-soft);border-radius:3px;background:var(--panel-bg);color:var(--ink)}.span2{grid-column:span 2}.range{display:flex;align-items:center;gap:6px;min-width:0}.range .control{flex:1;min-width:0}.range span{color:var(--gray);flex:none}.query-actions{display:flex;justify-content:flex-end;align-items:center;gap:8px}.list{flex:1;min-height:0;display:flex;flex-direction:column;padding:20px 24px}.table-wrap{flex:1;min-height:0;overflow:auto;border:1px solid var(--line-soft);border-radius:4px}table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{height:44px;padding:8px 10px;text-align:left;border-bottom:1px solid var(--line-soft)}th{position:sticky;top:0;z-index:2;background:var(--bg-soft);color:var(--gray);font-weight:600}th:first-child{left:0;z-index:3}tbody td:first-child{position:sticky;left:0;z-index:1;background:var(--panel-bg);box-shadow:1px 0 0 var(--line-soft)}tbody tr:hover td:first-child{background:#f8fbfc}tbody td:first-child.empty{position:static;background:none;box-shadow:none}tbody tr:hover{background:#f8fbfc}th.num,td.num{text-align:right;font-variant-numeric:tabular-nums}.ellip{display:inline-block;max-width:180px;overflow:hidden;text-overflow:ellipsis;vertical-align:middle}.ellip.doc{max-width:150px}td.in{color:var(--ok)}td.out{color:var(--err)}.tag{display:inline-block;padding:3px 8px;border-radius:3px;background:var(--info-bg);color:var(--teal)}.tag.ok{background:var(--ok-bg);color:#15803D}.tag.warn{background:var(--warn-bg);color:#A15C00}.pager{display:flex;align-items:center;gap:12px;padding-top:16px;flex:none}.pager .total{margin-right:auto;color:var(--gray)}.pager select{width:100px}[hidden]{display:none!important}@media(max-width:1100px){.query{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:640px){.page{padding:12px}.query{grid-template-columns:1fr}.span2,.query-actions{grid-column:auto}.query-actions{justify-content:flex-start}.head{align-items:flex-start;gap:12px}}
+</style><style>/* 输入焦点的项目统一规范。 */input:focus,select:focus,textarea:focus{outline:none;box-shadow:none}</style></head><body><main class="page" data-scene="water-operations"><header class="head"><h1 id="title">出入库流水</h1><div class="actions" id="actions"><button class="btn" type="button" id="exportBtn">导出</button></div></header><section class="panel query" id="query"></section><section class="panel list"><div class="table-wrap"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table></div><footer class="pager" id="pager"></footer></section></main><script>
+'use strict';
+// 2026-11-24：查询及列表字段“关联单号”统一更名为“业务单据”，字段绑定及查询逻辑沿用doc。
+// 2026-11-24：供应商与关联单号之间新增物料分组、物料类型，分别展示现有数据g、mt字段。
+// 2026-11-18：根据用户提供的库存流水列表截图生成，页面只读，无新增、编辑、删除及行操作。
+// 2026-11-18：按用户要求优化——列表改为序号、业务类型、业务日期、物料编码、物料名称、规格、出入库数量、当时剩余数量、单位、批次号、库位、仓库、供应商、关联单号、行号、流水号；查询为业务类型、业务日期范围、物料类型、物料分组、物料编码或名称、仓库、库位、供应商、批次号、关联单号。
+// 2026-11-18：供应商改为输入框查询，新增批次号查询条件；批次号列保留但按用户要求不展示具体值，仅查询时参与匹配。
+// 2026-11-19：序号列（含表头）固定在表格左侧，横向滚动时不跟随移动。
+// 演示数据说明：数量、日期、批次号、关联单号、供应商、行号与流水号均为情境化样例，不代表现场实际出入库记录；导出按钮仅作界面展示，不接功能。
+// 2026-11-24：业务类型及关联单号格式对齐现有采购入库、领料出库、其他入库、其他出库原型（PRI/MSO/OTI/OTO＋YYMMDD＋两位流水）。原退料样例归入其他入库，盘盈/盘亏样例调整为盘点调整-入库/出库；补充报废及其他出库演示类型。分类、日期和单号为演示映射，不代表实际源单及真实业务记录；出库为负、入库为正仍为演示口径。
+// AI 假设：物料类型沿用物料主数据口径（药剂／工具／化验室／备品备件／劳保用品）；供应商按物料与供应商主数据做演示映射，非真实业务归属。
+// AI 假设：当时剩余数量＝演示期初库存＋截至该笔的累计移动数量；期初库存为演示假设，非现场账面数据。行号按关联单号从1递增；流水号按用户要求为YYYYMMDD-三位序号，同一关联单号共用流水号。每日重置序号为演示假设。
+const $=id=>document.getElementById(id),esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const rows=[
+{d:'2026-11-17',t:'采购入库',code:'PJ707',name:'PAM（阴）',unit:'kg',spec:'',qty:300,doc:'PRI26111701',batch:'20261112-01',sup:'聊城市澳特环保科技有限公司',wc:'YJCK',wn:'药剂仓库',loc:'加药间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
+{d:'2026-11-17',t:'采购入库',code:'PJ704',name:'聚合氯化铝（PAC）',unit:'kg',spec:'',qty:8000,doc:'PRI26111702',batch:'20261112-02',sup:'德清宏兴化工有限公司',wc:'YJCK',wn:'药剂仓库',loc:'加药间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
+{d:'2026-11-16',t:'采购入库',code:'PJ709',name:'聚合硫酸铁（干粉）',unit:'kg',spec:'',qty:6000,doc:'PRI26111601',batch:'20261110-03',sup:'无锡市必盛水处理剂有限公司',wc:'YJCK',wn:'药剂仓库',loc:'脱泥间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
+{d:'2026-11-16',t:'领料出库',code:'PJ715',name:'片碱',unit:'kg',spec:'',qty:-500,doc:'MSO26111601',batch:'20261105-01',sup:'',wc:'YJCK',wn:'药剂仓库',loc:'脱泥间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
+{d:'2026-11-15',t:'领料出库',code:'PJ713',name:'活性炭',unit:'kg',spec:'',qty:-200,doc:'MSO26111501',batch:'20261028-04',sup:'',wc:'YJCK',wn:'药剂仓库',loc:'加药间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
+{d:'2026-11-15',t:'采购入库',code:'PJ719',name:'优氯净',unit:'kg',spec:'',qty:150,doc:'PRI26111501',batch:'20261109-02',sup:'网购',wc:'YJCK',wn:'药剂仓库',loc:'脱泥间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
+{d:'2026-11-14',t:'领料出库',code:'PJ706',name:'PAM（阳）',unit:'kg',spec:'',qty:-300,doc:'MSO26111401',batch:'20261103-05',sup:'',wc:'YJCK',wn:'药剂仓库',loc:'脱泥间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
+{d:'2026-11-14',t:'采购入库',code:'PJ710',name:'葡萄糖',unit:'kg',spec:'',qty:2000,doc:'PRI26111401',batch:'20261108-03',sup:'杭州超孟贸易有限公司',wc:'YJCK',wn:'药剂仓库',loc:'加药间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
+{d:'2026-11-14',t:'盘点调整-出库',code:'PJ720',name:'石灰',unit:'kg',spec:'',qty:-25,doc:'OTO26111401',batch:'20261020-01',sup:'',wc:'YJCK',wn:'药剂仓库',loc:'脱泥间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
+{d:'2026-11-13',t:'领料出库',code:'PJ718',name:'醋酸钠',unit:'kg',spec:'',qty:-400,doc:'MSO26111301',batch:'20261102-02',sup:'',wc:'YJCK',wn:'药剂仓库',loc:'脱泥间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
+{d:'2026-11-13',t:'其他入库',code:'PJ717',name:'氨氮菌粉',unit:'kg',spec:'',qty:20,doc:'OTI26111301',batch:'20261101-01',sup:'',wc:'YJCK',wn:'药剂仓库',loc:'脱泥间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
+{d:'2026-11-12',t:'采购入库',code:'PJ717',name:'氨氮菌粉',unit:'kg',spec:'',qty:200,doc:'PRI26111201',batch:'20261101-01',sup:'网购',wc:'YJCK',wn:'药剂仓库',loc:'脱泥间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
+{d:'2026-11-12',t:'采购入库',code:'PJ720',name:'石灰',unit:'kg',spec:'',qty:3000,doc:'PRI26111201',batch:'20261020-01',sup:'网购',wc:'YJCK',wn:'药剂仓库',loc:'脱泥间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
+{d:'2026-11-12',t:'领料出库',code:'PJ883',name:'纳氏试剂',unit:'瓶',spec:'500g',qty:-4,doc:'MSO26111201',batch:'20261015-02',sup:'',wc:'HYCK',wn:'化验仓库',loc:'化验库位',gc:'HYSYJ',g:'化验室药剂',mt:'化验室'},
+{d:'2026-11-11',t:'领料出库',code:'PJ707',name:'PAM（阴）',unit:'kg',spec:'',qty:-300,doc:'MSO26111101',batch:'20261025-03',sup:'',wc:'YJCK',wn:'药剂仓库',loc:'加药间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
+{d:'2026-11-11',t:'采购入库',code:'PJ715',name:'片碱',unit:'kg',spec:'',qty:1000,doc:'PRI26111101',batch:'20261105-01',sup:'德清宏兴化工有限公司',wc:'YJCK',wn:'药剂仓库',loc:'脱泥间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
+{d:'2026-11-10',t:'领料出库',code:'PJ709',name:'聚合硫酸铁（干粉）',unit:'kg',spec:'',qty:-1200,doc:'MSO26111001',batch:'20261018-01',sup:'',wc:'YJCK',wn:'药剂仓库',loc:'脱泥间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
+{d:'2026-11-10',t:'领料出库',code:'PJ710',name:'葡萄糖',unit:'kg',spec:'',qty:-500,doc:'MSO26111002',batch:'20261012-02',sup:'',wc:'YJCK',wn:'药剂仓库',loc:'加药间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
+{d:'2026-11-10',t:'采购入库',code:'PJ821',name:'手推车',unit:'辆',spec:'',qty:2,doc:'PRI26111001',batch:'',sup:'网购',wc:'BJCK',wn:'备品备件仓库',loc:'五金库位',gc:'GJXL',g:'工具系列',mt:'工具'},
+{d:'2026-11-09',t:'其他出库',code:'PJ713',name:'活性炭',unit:'kg',spec:'',qty:-100,doc:'OTO26110901',batch:'20260925-01',sup:'',wc:'YJCK',wn:'药剂仓库',loc:'加药间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
+{d:'2026-11-09',t:'采购入库',code:'PJ706',name:'PAM（阳）',unit:'kg',spec:'',qty:600,doc:'PRI26110901',batch:'20261103-05',sup:'聊城市澳特环保科技有限公司',wc:'YJCK',wn:'药剂仓库',loc:'脱泥间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
+{d:'2026-11-08',t:'盘点调整-入库',code:'PJ719',name:'优氯净',unit:'kg',spec:'',qty:8,doc:'OTI26110801',batch:'20261028-03',sup:'',wc:'YJCK',wn:'药剂仓库',loc:'脱泥间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
+{d:'2026-11-08',t:'报废出库',code:'PJ966',name:'容量瓶白1000ml',unit:'个',spec:'白1000ml',qty:-2,doc:'OTO26110801',batch:'',sup:'',wc:'HYCK',wn:'化验仓库',loc:'化验库位',gc:'HYSQM',g:'化验室器皿',mt:'化验室'},
+{d:'2026-11-07',t:'采购入库',code:'PJ718',name:'醋酸钠',unit:'kg',spec:'',qty:800,doc:'PRI26110701',batch:'20261102-02',sup:'网购',wc:'YJCK',wn:'药剂仓库',loc:'脱泥间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
+{d:'2026-11-06',t:'其他入库',code:'PJ924',name:'BOD吸收剂',unit:'瓶',spec:'',qty:3,doc:'OTI26110601',batch:'20260715-02',sup:'',wc:'HYCK',wn:'化验仓库',loc:'化验库位',gc:'HYSYJ',g:'化验室药剂',mt:'化验室'},
+{d:'2026-11-05',t:'采购入库',code:'PJ883',name:'纳氏试剂',unit:'瓶',spec:'500g',qty:10,doc:'PRI26110501',batch:'20261015-02',sup:'网购',wc:'HYCK',wn:'化验仓库',loc:'化验库位',gc:'HYSYJ',g:'化验室药剂',mt:'化验室'}];
+// 演示期初库存（AI 假设）：仅用于推算“当时剩余数量”，不代表现场账面结存。
+const opening={PJ707:600,PJ709:2000,PJ713:500,PJ710:1000,PJ966:10};
+const warehouses=[['YJCK','药剂仓库'],['HYCK','化验仓库'],['BJCK','备品备件仓库']];
+const locations=['加药间库位','脱泥间库位','消毒间库位','化验库位','五金库位'];
+const types=['采购入库','领料出库','盘点调整-入库','其他入库','盘点调整-出库','报废出库','其他出库'];
+const materialTypes=['药剂','工具','化验室','备品备件','劳保用品'];
+const groups=['药剂系列','工具系列','化验室药剂','化验室器皿'];
+const typeTag=t=>t.indexOf('入库')>-1?'ok':(t==='盘点调整-出库'?'warn':'');
+// 2026-11-24：流水号为YYYYMMDD-三位序号，按业务日期每日从001递增（演示口径）；同一关联单号共用流水号，行号从1递增。
+// 按业务日期正序计算演示结存；流水号按单据分配，不按明细行分配。
+(function(){
+  const asc=rows.map((r,i)=>({r,i})).sort((a,b)=>a.r.d.localeCompare(b.r.d)||a.i-b.i),stock={},daily=new Map(),documents=new Map();
+  asc.forEach(({r})=>{
+    stock[r.code]=(stock[r.code]??opening[r.code]??0)+r.qty;r.bal=stock[r.code];
+    if(!documents.has(r.doc)){
+      const seq=(daily.get(r.d)||0)+1;daily.set(r.d,seq);
+      documents.set(r.doc,{serial:r.d.replace(/-/g,'')+'-'+String(seq).padStart(3,'0'),line:0});
+    }
+    const doc=documents.get(r.doc);r.serial=doc.serial;r.line=++doc.line;
+  });
+})();
+let query={},page=1,size=5;
+function opts(list,label){return `<option value="">${label}</option>`+list.map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join('')}
+function drawQuery(){
+  $('query').innerHTML=`
+    <label>业务类型<select class="control" id="q-type">${opts(types,'请选择')}</select></label>
+    <label class="span2">业务日期<div class="range"><input class="control" type="date" id="q-from" aria-label="业务日期开始"><span>至</span><input class="control" type="date" id="q-to" aria-label="业务日期结束"></div></label>
+    <label>物料类型<select class="control" id="q-mt">${opts(materialTypes,'请选择')}</select></label>
+    <label>物料分组<select class="control" id="q-g">${opts(groups,'请选择')}</select></label>
+    <label>物料编码或名称<input class="control" id="q-kw" placeholder="请输入"></label>
+    <label>仓库<select class="control" id="q-wn">${opts(warehouses.map(w=>w[1]),'请选择')}</select></label>
+    <label>库位<select class="control" id="q-loc">${opts(locations,'请选择')}</select></label>
+    <label>供应商<input class="control" id="q-sup" placeholder="请输入"></label>
+    <label>业务单据<input class="control" id="q-doc" placeholder="请输入"></label>
+    <label>批次号<input class="control" id="q-batch" placeholder="请输入"></label>
+    <div class="query-actions"><button class="btn" type="button" id="reset">重置</button><button class="btn primary" type="button" id="search">查询</button></div>`;
+  $('search').onclick=()=>{
+    query={type:$('q-type').value,from:$('q-from').value,to:$('q-to').value,mt:$('q-mt').value,g:$('q-g').value,kw:$('q-kw').value.trim(),wn:$('q-wn').value,loc:$('q-loc').value,sup:$('q-sup').value.trim(),doc:$('q-doc').value.trim(),batch:$('q-batch').value.trim()};
+    page=1;renderList();
+  };
+  $('reset').onclick=()=>{
+    query={};['type','from','to','mt','g','kw','wn','loc','sup','doc','batch'].forEach(k=>$('q-'+k).value='');page=1;renderList();
+  };
+}
+function filtered(){
+  return rows.filter(r=>
+    (!query.type||r.t===query.type)&&
+    (!query.from||r.d>=query.from)&&
+    (!query.to||r.d<=query.to)&&
+    (!query.mt||r.mt===query.mt)&&
+    (!query.g||r.g===query.g)&&
+    (!query.kw||(r.code+' '+r.name).includes(query.kw))&&
+    (!query.wn||r.wn===query.wn)&&
+    (!query.loc||r.loc===query.loc)&&
+    (!query.sup||r.sup.includes(query.sup))&&
+    (!query.doc||r.doc.includes(query.doc))&&
+    (!query.batch||r.batch.includes(query.batch))
+  ).sort((a,b)=>b.d.localeCompare(a.d));
+}
+function renderList(){
+  const data=filtered(),pages=Math.max(1,Math.ceil(data.length/size));page=Math.min(page,pages);
+  const shown=data.slice((page-1)*size,page*size);
+  $('thead').innerHTML='<tr><th class="num">序号</th><th>业务类型</th><th>业务日期</th><th>物料编码</th><th>物料名称</th><th>规格</th><th class="num">出入库数量</th><th class="num">当时剩余数量</th><th>单位</th><th>批次号</th><th>库位</th><th>仓库</th><th>供应商</th><th>物料分组</th><th>物料类型</th><th>业务单据</th><th class="num">行号</th><th>流水号</th></tr>';
+  $('tbody').innerHTML=shown.map((r,i)=>`<tr><td class="num">${(page-1)*size+i+1}</td><td><span class="tag ${typeTag(r.t)}">${esc(r.t)}</span></td><td>${esc(r.d)}</td><td>${esc(r.code)}</td><td>${esc(r.name)}</td><td>${esc(r.spec)||'—'}</td><td class="num ${r.qty>0?'in':'out'}">${r.qty>0?'+':''}${r.qty.toLocaleString('zh-CN')}</td><td class="num">${r.bal.toLocaleString('zh-CN')}</td><td>${esc(r.unit)}</td><td>—</td><td>${esc(r.loc)}</td><td>${esc(r.wn)}</td><td><span class="ellip" title="${esc(r.sup)}">${esc(r.sup)||'—'}</span></td><td>${esc(r.g)||'—'}</td><td>${esc(r.mt)||'—'}</td><td><span class="ellip doc" title="${esc(r.doc)}">${esc(r.doc)}</span></td><td class="num">${r.line}</td><td>${esc(r.serial)}</td></tr>`).join('')||'<tr><td class="empty" colspan="18" style="height:160px;text-align:center;color:var(--gray)">暂无数据</td></tr>';
+  $('pager').innerHTML=`<span class="total">共 ${data.length} 条</span><span>第 ${page} / ${pages} 页</span><select class="control" id="pageSize" aria-label="每页条数">${[5,10,20,50].map(n=>`<option value="${n}" ${n===size?'selected':''}>${n}条/页</option>`).join('')}</select>`;
+  const prev=document.createElement('button');prev.className='btn';prev.textContent='上一页';prev.disabled=page===1;prev.onclick=()=>{page--;renderList()};
+  const next=document.createElement('button');next.className='btn';next.textContent='下一页';next.disabled=page===pages;next.onclick=()=>{page++;renderList()};
+  $('pager').append(prev,next);
+  $('pageSize').onchange=e=>{size=+e.target.value;page=1;renderList()};
+}
+// 导出按钮沿用项目既有口径：仅界面展示，不接入真实导出。
+$('exportBtn').onclick=null;
+drawQuery();renderList();
+</script></body></html>

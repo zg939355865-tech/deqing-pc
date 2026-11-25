@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>库存总账</title><link rel="stylesheet" href="../../assets/components/tokens.css"><link rel="stylesheet" href="../../assets/components/components.css"><style>
+*{box-sizing:border-box}html,body{height:100%;margin:0}body{font:13px var(--font-ui);color:var(--ink);background:var(--bg-page)}button,input,select,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--teal);outline-offset:1px}.page{height:100%;min-height:0;padding:20px 24px;display:flex;flex-direction:column;gap:16px}.head{display:flex;align-items:center;justify-content:space-between;flex:none}.head h1{margin:0;font-size:20px;line-height:1.5}.actions{display:flex;gap:10px}.btn{height:34px;padding:0 14px;border:1px solid var(--line);border-radius:4px;background:var(--panel-bg);color:var(--ink)}.btn:hover{border-color:var(--teal);color:var(--teal)}.btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}.panel{background:var(--panel-bg);border:1px solid var(--line-soft);border-radius:6px}.query{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 20px;padding:20px 24px;flex:none}.query label{display:grid;grid-template-columns:96px minmax(0,1fr);align-items:center;gap:8px;color:var(--gray);white-space:nowrap}.control{width:100%;height:32px;padding:5px 8px;border:1px solid var(--line-soft);border-radius:3px;background:var(--panel-bg);color:var(--ink)}.query-actions{display:flex;justify-content:flex-end;gap:8px;grid-column:1/-1}.list{flex:1;min-height:0;display:flex;flex-direction:column;padding:20px 24px}.table-wrap{flex:1;min-height:0;overflow:auto;border:1px solid var(--line-soft);border-radius:4px}table{width:100%;table-layout:fixed;border-collapse:collapse;white-space:nowrap}th,td{height:44px;padding:8px 14px;text-align:left;border-bottom:1px solid var(--line-soft);overflow:hidden;text-overflow:ellipsis}th{position:sticky;top:0;z-index:2;background:var(--bg-soft);color:var(--gray);font-weight:600}tbody tr:hover{background:#f8fbfc}th.num,td.num{text-align:right;font-variant-numeric:tabular-nums}.pager{display:flex;align-items:center;gap:12px;padding-top:16px;flex:none}.pager .total{margin-right:auto;color:var(--gray)}.pager select{width:100px}[hidden]{display:none!important}@media(max-width:900px){.query{grid-template-columns:repeat(2,minmax(0,1fr))}.query-actions{grid-column:auto}}@media(max-width:640px){.page{padding:12px}.query{grid-template-columns:1fr}.query-actions{grid-column:auto;justify-content:flex-start}.head{align-items:flex-start;gap:12px}}
+</style><style>/* 输入焦点的项目统一规范。 */input:focus,select:focus,textarea:focus{outline:none;box-shadow:none}</style><!-- 2026-11-20：库存字段名称统一为当前库存。 -->
+</head><body><main class="page" data-scene="water-operations"><header class="head"><h1 id="title">库存总账</h1><div class="actions" id="actions"><button class="btn" type="button" id="exportBtn">导出</button></div></header><section class="panel query" id="query"></section><section class="panel list"><div class="table-wrap"><table><colgroup><col style="width:11%"><col style="width:22%"><col style="width:16%"><col style="width:10%"><col style="width:6%"><col style="width:11%"><col style="width:16%"><col style="width:8%"></colgroup><thead id="thead"></thead><tbody id="tbody"></tbody></table></div><footer class="pager" id="pager"></footer></section></main><script>
+'use strict';
+// 2026-11-18：根据用户提供的库存总账列表截图生成，页面只读，无新增、编辑、删除。
+// 演示数据说明：库存数量、仓库编码、物料类型与分组为情境化样例，不代表现场实际库存；导出按钮仅作界面展示，不接功能。
+// 2026-11-18修订：按用户确认去除“是否低于安全库存”查询及“安全库存”“库存状态”列；查询为物料类型、物料分组、物料名称或编码、仓库；列表按物料编码、物料名称、规格、当前库存、单位、仓库、物料分组、物料类型展示。
+const $=id=>document.getElementById(id),esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const rows=[
+{code:'PJ1039',name:'PP防腐柜',unit:'只',spec:'900*450*1800',whCode:'HYCK',whName:'化验仓库',qty:1,type:'化验室',groupCode:'HYSSB',group:'化验室设备（固定）'},
+{code:'PJ966',name:'容量瓶白1000ml',unit:'个',spec:'白1000ml',whCode:'HYCK',whName:'化验仓库',qty:1,type:'化验室',groupCode:'HYSQM',group:'化验室器皿'},
+{code:'PJ924',name:'BOD吸收剂',unit:'瓶',spec:'',whCode:'HYCK',whName:'化验仓库',qty:1,type:'化验室',groupCode:'HYSYJ',group:'化验室药剂'},
+{code:'PJ883',name:'纳氏试剂',unit:'瓶',spec:'500g',whCode:'HYCK',whName:'化验仓库',qty:1,type:'化验室',groupCode:'HYSYJ',group:'化验室药剂'},
+{code:'PJ1043',name:'刚玉坩埚50ml',unit:'套',spec:'50ml',whCode:'HYCK',whName:'化验仓库',qty:1,type:'化验室',groupCode:'HYSSB',group:'化验室设备（固定）'},
+{code:'PJ999',name:'塑料量筒',unit:'只',spec:'100ml',whCode:'HYCK',whName:'化验仓库',qty:1,type:'化验室',groupCode:'HYSQM',group:'化验室器皿'},
+{code:'PJ957',name:'广口锥形瓶500ml',unit:'个',spec:'500ml',whCode:'HYCK',whName:'化验仓库',qty:1,type:'化验室',groupCode:'HYSQM',group:'化验室器皿'},
+{code:'PJ1034',name:'酶底物法大肠杆菌检测设备',unit:'台',spec:'主机含100套耗材',whCode:'HYCK',whName:'化验仓库',qty:1,type:'化验室',groupCode:'HYSSB',group:'化验室设备（固定）'},
+{code:'PJ892',name:'磷测定试剂盒',unit:'盒',spec:'',whCode:'HYCK',whName:'化验仓库',qty:1,type:'化验室',groupCode:'HYSYJ',group:'化验室药剂'},
+{code:'PJ915',name:'碘化汞',unit:'瓶',spec:'100g/瓶分析纯',whCode:'HYCK',whName:'化验仓库',qty:1,type:'化验室',groupCode:'HYSYJ',group:'化验室药剂'},
+{code:'PJ704',name:'聚合氯化铝（PAC）',unit:'kg',spec:'',whCode:'YJCK',whName:'药剂仓库',qty:12500,type:'药剂',groupCode:'YJXL',group:'药剂系列'},
+{code:'PJ709',name:'聚合硫酸铁（干粉）',unit:'kg',spec:'',whCode:'YJCK',whName:'药剂仓库',qty:8600,type:'药剂',groupCode:'YJXL',group:'药剂系列'},
+{code:'PJ715',name:'片碱',unit:'kg',spec:'',whCode:'YJCK',whName:'药剂仓库',qty:1800,type:'药剂',groupCode:'YJXL',group:'药剂系列'},
+{code:'PJ719',name:'优氯净',unit:'kg',spec:'',whCode:'YJCK',whName:'药剂仓库',qty:420,type:'药剂',groupCode:'YJXL',group:'药剂系列'},
+{code:'PJ821',name:'手推车',unit:'辆',spec:'',whCode:'BJCK',whName:'备品备件仓库',qty:3,type:'工具',groupCode:'GJXL',group:'工具系列'},
+{code:'PJ828',name:'小翻斗车',unit:'辆',spec:'',whCode:'BJCK',whName:'备品备件仓库',qty:1,type:'工具',groupCode:'GJXL',group:'工具系列'},
+{code:'PJ773',name:'电动自行车',unit:'辆',spec:'',whCode:'BJCK',whName:'备品备件仓库',qty:2,type:'工具',groupCode:'GJXL',group:'工具系列'},
+{code:'PJ978',name:'玻璃珠3-4cm',unit:'公斤',spec:'3-4cm',whCode:'HYCK',whName:'化验仓库',qty:2,type:'化验室',groupCode:'HYSQM',group:'化验室器皿'}];
+const warehouses=[['HYCK','化验仓库'],['YJCK','药剂仓库'],['BJCK','备品备件仓库']];
+let query={},page=1,size=5;
+function drawQuery(){
+  const groups=[...new Set(rows.map(r=>r.group))];
+  $('query').innerHTML=`
+    <label>物料类型<select class="control" id="q-type"><option value="">请选择</option>${['药剂','工具','化验室','备品备件','劳保用品'].map(t=>`<option>${t}</option>`).join('')}</select></label>
+    <label>物料分组<select class="control" id="q-group"><option value="">请选择</option>${groups.map(g=>`<option>${esc(g)}</option>`).join('')}</select></label>
+    <label>物料名称或编码<input class="control" id="q-kw" placeholder="请输入"></label>
+    <label>仓库<select class="control" id="q-wh"><option value="">请选择</option>${warehouses.map(([c,n])=>`<option value="${c}">${n}</option>`).join('')}</select></label>
+    <div class="query-actions"><button class="btn" type="button" id="reset">重置</button><button class="btn primary" type="button" id="search">查询</button></div>`;
+  $('search').onclick=()=>{
+    query={type:$('q-type').value,group:$('q-group').value,kw:$('q-kw').value.trim(),wh:$('q-wh').value};
+    page=1;renderList();
+  };
+  $('reset').onclick=()=>{
+    query={};['type','group','kw','wh'].forEach(k=>$('q-'+k).value='');page=1;renderList();
+  };
+}
+function filtered(){
+  const kw=(query.kw||'').toLowerCase();
+  return rows.filter(r=>(!query.type||r.type===query.type)&&(!query.group||r.group===query.group)&&(!query.wh||r.whCode===query.wh)&&(!kw||(r.code+' '+r.name).toLowerCase().includes(kw)));
+}
+function renderList(){
+  const data=filtered(),pages=Math.max(1,Math.ceil(data.length/size));page=Math.min(page,pages);
+  const shown=data.slice((page-1)*size,page*size);
+  $('thead').innerHTML='<tr><th>物料编码</th><th>物料名称</th><th>规格</th><th class="num">当前库存</th><th>单位</th><th>仓库</th><th>物料分组</th><th>物料类型</th></tr>';
+  $('tbody').innerHTML=shown.map(r=>`<tr><td>${esc(r.code)}</td><td>${esc(r.name)}</td><td>${esc(r.spec)||'—'}</td><td class="num">${r.qty.toLocaleString('zh-CN')}</td><td>${esc(r.unit)}</td><td>${esc(r.whName)}</td><td>${esc(r.group)}</td><td>${esc(r.type)}</td></tr>`).join('')||'<tr><td colspan="8" style="height:160px;text-align:center;color:var(--gray)">暂无数据</td></tr>';
+  $('pager').innerHTML=`<span class="total">共 ${data.length} 条</span><span>第 ${page} / ${pages} 页</span><select class="control" id="pageSize" aria-label="每页条数">${[5,10,20,50].map(n=>`<option value="${n}" ${n===size?'selected':''}>${n}条/页</option>`).join('')}</select>`;
+  const prev=document.createElement('button');prev.className='btn';prev.textContent='上一页';prev.disabled=page===1;prev.onclick=()=>{page--;renderList()};
+  const next=document.createElement('button');next.className='btn';next.textContent='下一页';next.disabled=page===pages;next.onclick=()=>{page++;renderList()};
+  $('pager').append(prev,next);
+  $('pageSize').onchange=e=>{size=+e.target.value;page=1;renderList()};
+}
+// 导出按钮沿用项目既有口径：仅界面展示，不接入真实导出。
+$('exportBtn').onclick=null;
+drawQuery();renderList();
+</script></body></html>
