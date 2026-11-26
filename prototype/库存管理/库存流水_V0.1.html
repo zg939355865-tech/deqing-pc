@@ -14,7 +14,11 @@
 // AI 假设：物料类型沿用物料主数据口径（药剂／工具／化验室／备品备件／劳保用品）；供应商按物料与供应商主数据做演示映射，非真实业务归属。
 // AI 假设：当时剩余数量＝演示期初库存＋截至该笔的累计移动数量；期初库存为演示假设，非现场账面数据。行号按关联单号从1递增；流水号按用户要求为YYYYMMDD-三位序号，同一关联单号共用流水号。每日重置序号为演示假设。
 const $=id=>document.getElementById(id),esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+// 2026-11-26：按用户要求新增以旧换新类型；以旧换新领料按新件领料出库、旧件以旧换新入库记录两笔，共用业务单据和流水号。
+// 以下采用领料出库原型已出库单MSO26111801的静态快照，不实时联动；旧件沿用物料编码，名称标注旧件，按独立旧件结存演示，不抵回新件可用库存。旧件实际编码和存放位置待确认。
 const rows=[
+{d:'2026-11-18',t:'领料出库',code:'BJ001',name:'潜水泵机械密封',unit:'套',spec:'配套型',qty:-1,doc:'MSO26111801',batch:'',sup:'',wc:'BJCK',wn:'备件仓库',loc:'默认库位',gc:'SBPJ',g:'设备备件',mt:'备品备件'},
+{d:'2026-11-18',t:'以旧换新',code:'BJ001',name:'潜水泵机械密封（旧件）',unit:'套',spec:'配套型',qty:1,doc:'MSO26111801',batch:'',sup:'',wc:'BJCK',wn:'备件仓库',loc:'默认库位',gc:'SBPJ',g:'设备备件',mt:'备品备件',old:true},
 {d:'2026-11-17',t:'采购入库',code:'PJ707',name:'PAM（阴）',unit:'kg',spec:'',qty:300,doc:'PRI26111701',batch:'20261112-01',sup:'聊城市澳特环保科技有限公司',wc:'YJCK',wn:'药剂仓库',loc:'加药间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
 {d:'2026-11-17',t:'采购入库',code:'PJ704',name:'聚合氯化铝（PAC）',unit:'kg',spec:'',qty:8000,doc:'PRI26111702',batch:'20261112-02',sup:'德清宏兴化工有限公司',wc:'YJCK',wn:'药剂仓库',loc:'加药间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
 {d:'2026-11-16',t:'采购入库',code:'PJ709',name:'聚合硫酸铁（干粉）',unit:'kg',spec:'',qty:6000,doc:'PRI26111601',batch:'20261110-03',sup:'无锡市必盛水处理剂有限公司',wc:'YJCK',wn:'药剂仓库',loc:'脱泥间库位',gc:'YJXL',g:'药剂系列',mt:'药剂'},
@@ -42,19 +46,20 @@ const rows=[
 {d:'2026-11-06',t:'其他入库',code:'PJ924',name:'BOD吸收剂',unit:'瓶',spec:'',qty:3,doc:'OTI26110601',batch:'20260715-02',sup:'',wc:'HYCK',wn:'化验仓库',loc:'化验库位',gc:'HYSYJ',g:'化验室药剂',mt:'化验室'},
 {d:'2026-11-05',t:'采购入库',code:'PJ883',name:'纳氏试剂',unit:'瓶',spec:'500g',qty:10,doc:'PRI26110501',batch:'20261015-02',sup:'网购',wc:'HYCK',wn:'化验仓库',loc:'化验库位',gc:'HYSYJ',g:'化验室药剂',mt:'化验室'}];
 // 演示期初库存（AI 假设）：仅用于推算“当时剩余数量”，不代表现场账面结存。
-const opening={PJ707:600,PJ709:2000,PJ713:500,PJ710:1000,PJ966:10};
-const warehouses=[['YJCK','药剂仓库'],['HYCK','化验仓库'],['BJCK','备品备件仓库']];
-const locations=['加药间库位','脱泥间库位','消毒间库位','化验库位','五金库位'];
-const types=['采购入库','领料出库','盘点调整-入库','其他入库','盘点调整-出库','报废出库','其他出库'];
+const opening={PJ707:600,PJ709:2000,PJ713:500,PJ710:1000,PJ966:10,BJ001:6};
+const warehouses=[['YJCK','药剂仓库'],['HYCK','化验仓库'],['BJCK','备件仓库']];
+const locations=['加药间库位','脱泥间库位','消毒间库位','化验库位','五金库位','默认库位'];
+const types=['采购入库','领料出库','以旧换新','盘点调整-入库','其他入库','盘点调整-出库','报废出库','其他出库'];
 const materialTypes=['药剂','工具','化验室','备品备件','劳保用品'];
-const groups=['药剂系列','工具系列','化验室药剂','化验室器皿'];
-const typeTag=t=>t.indexOf('入库')>-1?'ok':(t==='盘点调整-出库'?'warn':'');
+const groups=['药剂系列','工具系列','化验室药剂','化验室器皿','设备备件'];
+const typeTag=t=>(t.indexOf('入库')>-1||t==='以旧换新')?'ok':(t==='盘点调整-出库'?'warn':'');
 // 2026-11-24：流水号为YYYYMMDD-三位序号，按业务日期每日从001递增（演示口径）；同一关联单号共用流水号，行号从1递增。
 // 按业务日期正序计算演示结存；流水号按单据分配，不按明细行分配。
 (function(){
   const asc=rows.map((r,i)=>({r,i})).sort((a,b)=>a.r.d.localeCompare(b.r.d)||a.i-b.i),stock={},daily=new Map(),documents=new Map();
   asc.forEach(({r})=>{
-    stock[r.code]=(stock[r.code]??opening[r.code]??0)+r.qty;r.bal=stock[r.code];
+    const stockKey=r.old?r.code+'-old':r.code;
+    stock[stockKey]=(stock[stockKey]??(r.old?0:opening[r.code])??0)+r.qty;r.bal=stock[stockKey];
     if(!documents.has(r.doc)){
       const seq=(daily.get(r.d)||0)+1;daily.set(r.d,seq);
       documents.set(r.doc,{serial:r.d.replace(/-/g,'')+'-'+String(seq).padStart(3,'0'),line:0});
